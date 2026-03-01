@@ -46,15 +46,22 @@ const slideRight = {
    CUSTOM CURSOR
    ==================================== */
 function CustomCursor() {
-  const [pos, setPos] = useState({ x: -100, y: -100 })
+  const dotRef = useRef(null)
+  const followerRef = useRef(null)
+  const mouse = useRef({ x: -100, y: -100 })
+  const followerPos = useRef({ x: -100, y: -100 })
+  const rafRef = useRef(null)
   const [visible, setVisible] = useState(false)
   const [clicking, setClicking] = useState(false)
   const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
     const move = (e) => {
-      setPos({ x: e.clientX, y: e.clientY })
+      mouse.current = { x: e.clientX, y: e.clientY }
       setVisible(true)
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
+      }
     }
     const leave = () => setVisible(false)
     const down = () => setClicking(true)
@@ -66,6 +73,17 @@ function CustomCursor() {
       if (e.target.closest('a, button, [role="button"]')) setHovering(false)
     }
 
+    // RAF loop — lerp follower toward mouse at 12% each frame for smooth lag
+    const animate = () => {
+      followerPos.current.x += (mouse.current.x - followerPos.current.x) * 0.12
+      followerPos.current.y += (mouse.current.y - followerPos.current.y) * 0.12
+      if (followerRef.current) {
+        followerRef.current.style.transform = `translate(${followerPos.current.x}px, ${followerPos.current.y}px)`
+      }
+      rafRef.current = requestAnimationFrame(animate)
+    }
+    rafRef.current = requestAnimationFrame(animate)
+
     window.addEventListener('mousemove', move)
     document.documentElement.addEventListener('mouseleave', leave)
     window.addEventListener('mousedown', down)
@@ -74,6 +92,7 @@ function CustomCursor() {
     document.addEventListener('mouseout', out)
 
     return () => {
+      cancelAnimationFrame(rafRef.current)
       window.removeEventListener('mousemove', move)
       document.documentElement.removeEventListener('mouseleave', leave)
       window.removeEventListener('mousedown', down)
@@ -84,10 +103,16 @@ function CustomCursor() {
   }, [])
 
   return (
-    <div
-      className={`custom-cursor ${visible ? 'visible' : ''} ${hovering ? 'hovering' : ''} ${clicking ? 'clicking' : ''}`}
-      style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
-    />
+    <>
+      <div
+        ref={dotRef}
+        className={`cursor-dot ${visible ? 'visible' : ''} ${clicking ? 'clicking' : ''}`}
+      />
+      <div
+        ref={followerRef}
+        className={`cursor-follower ${visible ? 'visible' : ''} ${hovering ? 'hovering' : ''} ${clicking ? 'clicking' : ''}`}
+      />
+    </>
   )
 }
 
