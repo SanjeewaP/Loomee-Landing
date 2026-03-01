@@ -281,7 +281,7 @@ function PhoneMockup({ small = false }) {
             </div>
           </div>
           <div className="phone-bottom-bar">
-            <span><Camera size={14} color="var(--purple-400)" /></span>
+            <span><Camera size={14} color="var(--terracotta-400)" /></span>
             <span><Shirt size={14} color="var(--text-muted)" /></span>
             <span><Heart size={14} color="var(--text-muted)" /></span>
             <span><TrendingUp size={14} color="var(--text-muted)" /></span>
@@ -659,7 +659,7 @@ function TestimonialsSection() {
           {testimonials.map((t, i) => (
             <motion.div key={i} className="testimonial-card" variants={fadeUp}>
               <div className="testimonial-stars">
-                {[...Array(5)].map((_, j) => <Star key={j} className="star" size={16} fill="#fbbf24" />)}
+                {[...Array(5)].map((_, j) => <Star key={j} className="star" size={16} fill="#C4963A" />)}
               </div>
               <p className="testimonial-text">{t.text}</p>
               <div className="testimonial-author">
@@ -790,9 +790,10 @@ function CTASection() {
             no more returns — just clothes that fit you.
           </p>
           <div className="cta-buttons">
-            <a href="#" className="btn-white">
-              Download the App <ArrowRight size={18} />
-            </a>
+            <div className="btn-coming-soon">
+              <span className="coming-soon-dot" />
+              App Coming Soon
+            </div>
             <a href="#features" className="btn-glass">
               Explore Features
             </a>
