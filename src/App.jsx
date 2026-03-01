@@ -49,6 +49,7 @@ function CustomCursor() {
   const [pos, setPos] = useState({ x: -100, y: -100 })
   const [visible, setVisible] = useState(false)
   const [clicking, setClicking] = useState(false)
+  const [hovering, setHovering] = useState(false)
 
   useEffect(() => {
     const move = (e) => {
@@ -58,23 +59,33 @@ function CustomCursor() {
     const leave = () => setVisible(false)
     const down = () => setClicking(true)
     const up = () => setClicking(false)
+    const over = (e) => {
+      if (e.target.closest('a, button, [role="button"]')) setHovering(true)
+    }
+    const out = (e) => {
+      if (e.target.closest('a, button, [role="button"]')) setHovering(false)
+    }
 
     window.addEventListener('mousemove', move)
     document.documentElement.addEventListener('mouseleave', leave)
     window.addEventListener('mousedown', down)
     window.addEventListener('mouseup', up)
+    document.addEventListener('mouseover', over)
+    document.addEventListener('mouseout', out)
 
     return () => {
       window.removeEventListener('mousemove', move)
       document.documentElement.removeEventListener('mouseleave', leave)
       window.removeEventListener('mousedown', down)
       window.removeEventListener('mouseup', up)
+      document.removeEventListener('mouseover', over)
+      document.removeEventListener('mouseout', out)
     }
   }, [])
 
   return (
     <div
-      className={`custom-cursor ${visible ? 'visible' : ''} ${clicking ? 'clicking' : ''}`}
+      className={`custom-cursor ${visible ? 'visible' : ''} ${hovering ? 'hovering' : ''} ${clicking ? 'clicking' : ''}`}
       style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
     />
   )
