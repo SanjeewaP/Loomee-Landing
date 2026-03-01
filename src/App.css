@@ -88,7 +88,7 @@
   font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   margin-right: 48px;
   display: inline-flex;
   align-items: center;
@@ -331,15 +331,15 @@
   align-items: center;
   gap: 8px;
   padding: 6px 16px 6px 8px;
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--terracotta-600);
   margin-bottom: 32px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 16px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 20px rgba(28, 43, 57, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .hero-badge .badge-dot {
@@ -365,10 +365,11 @@
 }
 
 .hero h1 .highlight {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--text-primary);
+  background: none;
+  -webkit-background-clip: initial;
+  -webkit-text-fill-color: var(--text-primary);
+  background-clip: initial;
 }
 
 .hero-description {
@@ -576,18 +577,18 @@
 .floating-card {
   position: absolute;
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(20px) saturate(160%);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: 14px;
   font-size: 0.75rem;
   color: var(--text-secondary);
   white-space: nowrap;
   box-shadow:
-    0 8px 32px rgba(28, 43, 57, 0.08),
-    0 2px 8px rgba(28, 43, 57, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 10px 36px rgba(28, 43, 57, 0.12),
+    0 2px 8px rgba(28, 43, 57, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .floating-card .fc-label {
@@ -664,6 +665,7 @@
 .features-section {
   padding: var(--section-gap) 0;
   position: relative;
+  background: var(--bg-secondary);
 }
 
 .features-grid {
@@ -674,15 +676,15 @@
 
 .feature-card {
   padding: 36px 28px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   transition: all 0.4s var(--ease-out-expo);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .feature-card::before {
@@ -698,10 +700,10 @@
 }
 
 .feature-card:hover {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(181, 103, 61, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(181, 103, 61, 0.2);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(28, 43, 57, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 16px 48px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .feature-card:hover::before {
@@ -838,10 +840,10 @@
 }
 
 .demo-container {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(24px) saturate(160%);
-  -webkit-backdrop-filter: blur(24px) saturate(160%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 28px;
   padding: 64px;
   display: grid;
@@ -850,7 +852,7 @@
   align-items: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 40px rgba(28, 43, 57, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 48px rgba(28, 43, 57, 0.12), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .demo-container::before {
@@ -922,6 +924,7 @@
 /* ---- TECH STACK ---- */
 .tech-section {
   padding: var(--section-gap) 0;
+  background: var(--bg-secondary);
 }
 
 .tech-grid {
@@ -932,21 +935,21 @@
 
 .tech-card {
   padding: 28px 20px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 16px;
   text-align: center;
   transition: all 0.3s var(--ease-out-expo);
-  box-shadow: 0 4px 24px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .tech-card:hover {
-  background: rgba(255, 255, 255, 0.7);
-  border-color: rgba(181, 103, 61, 0.12);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(181, 103, 61, 0.2);
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(28, 43, 57, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 14px 40px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .tech-card-icon {
@@ -986,19 +989,19 @@
 
 .why-card {
   padding: 40px 32px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   transition: all 0.4s var(--ease-out-expo);
-  box-shadow: 0 4px 24px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .why-card:hover {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.88);
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(28, 43, 57, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow: 0 16px 48px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .why-card-number {
@@ -1030,6 +1033,7 @@
 /* ---- TESTIMONIALS ---- */
 .testimonials-section {
   padding: var(--section-gap) 0;
+  background: var(--bg-secondary);
 }
 
 .testimonials-grid {
@@ -1040,18 +1044,18 @@
 
 .testimonial-card {
   padding: 32px 28px;
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   transition: all 0.4s var(--ease-out-expo);
-  box-shadow: 0 4px 24px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .testimonial-card:hover {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0 12px 40px rgba(28, 43, 57, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 14px 44px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .testimonial-stars {
@@ -1229,14 +1233,14 @@
 }
 
 .faq-item {
-  background: rgba(255, 255, 255, 0.45);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s;
-  box-shadow: 0 4px 24px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .faq-item.open {
