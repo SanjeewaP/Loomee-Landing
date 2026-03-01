@@ -43,6 +43,44 @@ const slideRight = {
 }
 
 /* ====================================
+   CUSTOM CURSOR
+   ==================================== */
+function CustomCursor() {
+  const [pos, setPos] = useState({ x: -100, y: -100 })
+  const [visible, setVisible] = useState(false)
+  const [clicking, setClicking] = useState(false)
+
+  useEffect(() => {
+    const move = (e) => setPos({ x: e.clientX, y: e.clientY })
+    const enter = () => setVisible(true)
+    const leave = () => setVisible(false)
+    const down = () => setClicking(true)
+    const up = () => setClicking(false)
+
+    window.addEventListener('mousemove', move)
+    document.addEventListener('mouseenter', enter)
+    document.addEventListener('mouseleave', leave)
+    window.addEventListener('mousedown', down)
+    window.addEventListener('mouseup', up)
+
+    return () => {
+      window.removeEventListener('mousemove', move)
+      document.removeEventListener('mouseenter', enter)
+      document.removeEventListener('mouseleave', leave)
+      window.removeEventListener('mousedown', down)
+      window.removeEventListener('mouseup', up)
+    }
+  }, [])
+
+  return (
+    <div
+      className={`custom-cursor ${visible ? 'visible' : ''} ${clicking ? 'clicking' : ''}`}
+      style={{ transform: `translate(${pos.x}px, ${pos.y}px)` }}
+    />
+  )
+}
+
+/* ====================================
    NAVBAR
    ==================================== */
 function Navbar() {
@@ -78,7 +116,7 @@ function Navbar() {
         <div className="navbar-inner">
           <a href="#" className="navbar-logo">
             <div className="logo-icon">L</div>
-            Loomée
+            Loomeé
           </a>
 
           <div className="navbar-links">
@@ -189,14 +227,14 @@ function HeroSection() {
         </motion.h1>
 
         <motion.p variants={fadeUp} className="hero-description">
-          Loomée is an AI-powered virtual fitting room that lets you try on clothes
+          Loomeé is an AI-powered virtual fitting room that lets you try on clothes
           digitally — with real-time body analysis, personalized size recommendations,
           and intelligent style insights.
         </motion.p>
 
         <motion.div variants={fadeUp} className="hero-buttons">
           <a href="#cta" className="btn-primary btn-large">
-            Try Loomée Free <ArrowRight size={18} />
+            Try Loomeé Free <ArrowRight size={18} />
           </a>
           <a href="#how-it-works" className="btn-outline">
             See How It Works
@@ -269,7 +307,7 @@ function PhoneMockup({ small = false }) {
       <div className="phone-screen">
         <div className="phone-screen-content">
           <div className="phone-screen-header">
-            <h3>Loomée</h3>
+            <h3>Loomeé</h3>
             <p>Virtual Try-On</p>
           </div>
           <div className="phone-outfit-preview">
@@ -380,7 +418,7 @@ function HowItWorks() {
       num: '01',
       icon: <Upload size={28} />,
       title: 'Upload Your Photo',
-      desc: 'Take or upload a full-body photo. Loomée securely processes your image to understand your body proportions and measurements.',
+      desc: 'Take or upload a full-body photo. Loomeé securely processes your image to understand your body proportions and measurements.',
     },
     {
       num: '02',
@@ -458,7 +496,7 @@ function DemoSection() {
         >
           <motion.div className="demo-content" variants={slideLeft}>
             <div className="section-eyebrow">Live Demo</div>
-            <h2>See Loomée in Action</h2>
+            <h2>See Loomeé in Action</h2>
             <p>
               Upload a photo, pick a garment, and watch our AI deliver instant fit
               analysis, smart size suggestions, and a virtual try-on preview — all
@@ -524,7 +562,7 @@ function TechSection() {
           <div className="section-eyebrow">Technology</div>
           <h2 className="section-title">Built with Modern Tech</h2>
           <p className="section-subtitle">
-            Loomée combines cutting-edge AI models with robust cloud infrastructure
+            Loomeé combines cutting-edge AI models with robust cloud infrastructure
             to deliver a fast, secure, and reliable experience.
           </p>
         </motion.div>
@@ -570,7 +608,7 @@ function WhySection() {
     },
     {
       title: 'Built for Everyone',
-      desc: 'Whether you\'re a student shopping online or a fashion enthusiast exploring styles, Loomée adapts to your needs.',
+      desc: 'Whether you\'re a student shopping online or a fashion enthusiast exploring styles, Loomeé adapts to your needs.',
     },
   ]
 
@@ -583,8 +621,8 @@ function WhySection() {
           animate={isInView ? 'visible' : 'hidden'}
           variants={fadeUp}
         >
-          <div className="section-eyebrow">Why Loomée</div>
-          <h2 className="section-title">Why Choose Loomée?</h2>
+          <div className="section-eyebrow">Why Loomeé</div>
+          <h2 className="section-title">Why Choose Loomeé?</h2>
           <p className="section-subtitle">
             A virtual fitting platform built to be accurate, private, and genuinely useful.
           </p>
@@ -618,7 +656,7 @@ function TestimonialsSection() {
 
   const testimonials = [
     {
-      text: '"Loomée completely changed how I shop online. I used to return half my orders — now I know exactly what size to pick before I buy."',
+      text: '"Loomeé completely changed how I shop online. I used to return half my orders — now I know exactly what size to pick before I buy."',
       name: 'Sarah K.',
       role: 'Fashion Enthusiast',
       initials: 'SK',
@@ -630,7 +668,7 @@ function TestimonialsSection() {
       initials: 'MD',
     },
     {
-      text: '"As someone who struggles with inconsistent sizing across brands, Loomée\'s per-garment analysis is a game-changer. Love the confidence scores."',
+      text: '"As someone who struggles with inconsistent sizing across brands, Loomeé\'s per-garment analysis is a game-changer. Love the confidence scores."',
       name: 'Priya M.',
       role: 'Style Blogger',
       initials: 'PM',
@@ -687,8 +725,8 @@ function FAQSection() {
 
   const faqs = [
     {
-      q: 'How does Loomée analyze my body measurements?',
-      a: 'Loomée uses Google Gemini 2.5 Flash, an advanced AI vision model, to analyze your uploaded body photos. The AI detects key body points and calculates proportions including chest, waist, hips, and height measurements with high accuracy.',
+      q: 'How does Loomeé analyze my body measurements?',
+      a: 'Loomeé uses Google Gemini 2.5 Flash, an advanced AI vision model, to analyze your uploaded body photos. The AI detects key body points and calculates proportions including chest, waist, hips, and height measurements with high accuracy.',
     },
     {
       q: 'Is my personal data and body photos safe?',
@@ -703,12 +741,12 @@ function FAQSection() {
       a: 'The virtual try-on uses Replicate API to generate AI-powered images showing how clothing items would look on your body. Combined with our body analysis, you get a realistic preview of fit and style before making a purchase.',
     },
     {
-      q: 'Does Loomée work with any clothing brand?',
+      q: 'Does Loomeé work with any clothing brand?',
       a: 'Yes! You can browse our built-in catalog or upload any clothing image. Our AI analyzes the garment\'s visual properties — color, style, fabric type — and provides recommendations regardless of the brand.',
     },
     {
-      q: 'What platforms is Loomée available on?',
-      a: 'Loomée is built as a cross-platform Flutter mobile app available on both iOS and Android. The backend API is cloud-hosted on Render with 99.9% uptime, ensuring a seamless experience on any device.',
+      q: 'What platforms is Loomeé available on?',
+      a: 'Loomeé is built as a cross-platform Flutter mobile app available on both iOS and Android. The backend API is cloud-hosted on Render with 99.9% uptime, ensuring a seamless experience on any device.',
     },
   ]
 
@@ -724,7 +762,7 @@ function FAQSection() {
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle">
-            Everything you need to know about Loomée and how it works.
+            Everything you need to know about Loomeé and how it works.
           </p>
         </motion.div>
 
@@ -786,7 +824,7 @@ function CTASection() {
         >
           <h2>Ready to find your perfect fit?</h2>
           <p>
-            Join Loomée and shop online with confidence. No more wrong sizes,
+            Join Loomeé and shop online with confidence. No more wrong sizes,
             no more returns — just clothes that fit you.
           </p>
           <div className="cta-buttons">
@@ -815,7 +853,7 @@ function Footer() {
           <div className="footer-brand">
             <a href="#" className="navbar-logo">
               <div className="logo-icon">L</div>
-              Loomée
+              Loomeé
             </a>
             <p>
               AI-powered virtual fitting room that helps you shop online with
@@ -849,7 +887,7 @@ function Footer() {
         </div>
 
         <div className="footer-bottom">
-          <p>© 2026 Loomée. All rights reserved.</p>
+          <p>© 2026 Loomeé. All rights reserved.</p>
           <div className="footer-socials">
             <a href="https://github.com/ShaneRowell/LoomeeApp" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="GitHub">
               <Github size={16} />
@@ -876,6 +914,7 @@ function Footer() {
 export default function App() {
   return (
     <>
+      <CustomCursor />
       <div className="noise-overlay" />
       <Navbar />
       <HeroSection />
