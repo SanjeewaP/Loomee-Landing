@@ -817,9 +817,8 @@ function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="#" className="navbar-logo">
-              <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
-              Loomeé VTO
+            <a href="#" className="footer-brand-logo-link">
+              <img src="/Logo.png" alt="Loomeé VTO" className="footer-brand-logo" />
             </a>
             <p>
               AI-powered virtual fitting room that helps you shop online with
