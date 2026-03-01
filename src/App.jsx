@@ -82,7 +82,7 @@ function Navbar() {
         <div className="navbar-inner">
           <a href="#" className="navbar-logo">
             <div className="logo-icon">L</div>
-            Loomeé
+            Loomeé VTO
           </a>
 
           <div className="navbar-links">
