@@ -51,22 +51,22 @@ function CustomCursor() {
   const [clicking, setClicking] = useState(false)
 
   useEffect(() => {
-    const move = (e) => setPos({ x: e.clientX, y: e.clientY })
-    const enter = () => setVisible(true)
+    const move = (e) => {
+      setPos({ x: e.clientX, y: e.clientY })
+      setVisible(true)
+    }
     const leave = () => setVisible(false)
     const down = () => setClicking(true)
     const up = () => setClicking(false)
 
     window.addEventListener('mousemove', move)
-    document.addEventListener('mouseenter', enter)
-    document.addEventListener('mouseleave', leave)
+    document.documentElement.addEventListener('mouseleave', leave)
     window.addEventListener('mousedown', down)
     window.addEventListener('mouseup', up)
 
     return () => {
       window.removeEventListener('mousemove', move)
-      document.removeEventListener('mouseenter', enter)
-      document.removeEventListener('mouseleave', leave)
+      document.documentElement.removeEventListener('mouseleave', leave)
       window.removeEventListener('mousedown', down)
       window.removeEventListener('mouseup', up)
     }
