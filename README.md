@@ -81,4 +81,4 @@ git push
 
 ---
 
-© 2026 Loomée. Built as a BSc final year project.
+© 2026 Loomée. Built as an SDGP project for group CS-123.
