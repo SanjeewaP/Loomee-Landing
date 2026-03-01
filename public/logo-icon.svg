@@ -1,0 +1,35 @@
+<svg viewBox="0 0 120 130" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="120" height="130" rx="14" fill="#6B6E73"/>
+
+  <!-- L — vertical bar -->
+  <rect x="25" y="13" width="27" height="88" rx="6" fill="#F0EBE0"/>
+  <!-- L — horizontal bar -->
+  <rect x="25" y="89" width="72" height="25" rx="6" fill="#F0EBE0"/>
+
+  <!-- Thread (terracotta) — drawn before needle so needle sits on top -->
+  <path
+    d="M 76 30 C 66 38, 42 44, 46 64 C 50 84, 76 80, 77 102 C 78 116, 64 120, 50 117"
+    stroke="#B5673D"
+    stroke-width="2.8"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+
+  <!-- Needle body — diagonal from upper-right to lower-left -->
+  <line x1="87" y1="18" x2="36" y2="112" stroke="#EDE9E0" stroke-width="4.5" stroke-linecap="round"/>
+
+  <!-- Needle tip — finer point -->
+  <line x1="36" y1="112" x2="32" y2="122" stroke="#D6D0C6" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Needle eye — small oval hole near the top of the needle -->
+  <ellipse
+    cx="82.5"
+    cy="25"
+    rx="5"
+    ry="3"
+    transform="rotate(-49 82.5 25)"
+    fill="#6B6E73"
+  />
+</svg>
