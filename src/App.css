@@ -100,10 +100,12 @@
 }
 
 .navbar-logo .logo-icon {
-  height: 34px;
-  width: auto;
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
   display: block;
   flex-shrink: 0;
+  border-radius: 50%;
 }
 
 .navbar-links {

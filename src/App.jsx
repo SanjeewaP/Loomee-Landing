@@ -81,7 +81,7 @@ function Navbar() {
       >
         <div className="navbar-inner">
           <a href="#" className="navbar-logo">
-            <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
+            <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
             Loomeé VTO
           </a>
 
@@ -818,7 +818,7 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#" className="navbar-logo">
-              <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
+              <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
               Loomeé VTO
             </a>
             <p>
