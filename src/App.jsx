@@ -818,7 +818,7 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#" className="navbar-logo">
-              <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
+              <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
               Loomeé VTO
             </a>
             <p>
@@ -839,32 +839,30 @@ function Footer() {
             <h4>Resources</h4>
             <a href="#faq">FAQ</a>
             <a href="#">API Docs</a>
-            <a href="#">Blog</a>
-            <a href="#">Changelog</a>
           </div>
 
           <div className="footer-col">
             <h4>Legal</h4>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Contact</a>
+            <a href="#/privacy">Privacy Policy</a>
+            <a href="#/terms">Terms of Service</a>
+            <a href="#/cookies">Cookie Policy</a>
+            <a href="mailto:loomeevto@gmail.com">Contact</a>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <p>© 2026 Loomeé. All rights reserved.</p>
+          <p>© 2026 Loomeé. All rights reserved CS-123.</p>
           <div className="footer-socials">
             <a href="https://github.com/ShaneRowell/LoomeeApp" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="GitHub">
               <Github size={16} />
             </a>
-            <a href="#" className="footer-social-link" aria-label="Twitter">
-              <Twitter size={16} />
+            <a href="https://www.linkedin.com/company/loomeevto/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             </a>
-            <a href="#" className="footer-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/loomeevto/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
               <Instagram size={16} />
             </a>
-            <a href="#" className="footer-social-link" aria-label="Email">
+            <a href="mailto:loomeevto@gmail.com" className="footer-social-link" aria-label="Email">
               <Mail size={16} />
             </a>
           </div>
@@ -875,24 +873,250 @@ function Footer() {
 }
 
 /* ====================================
-   APP ROOT
+   LEGAL PAGE WRAPPER
    ==================================== */
-export default function App() {
+function LegalPage({ title, children }) {
+  useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <>
       <div className="noise-overlay" />
       <Navbar />
-      <HeroSection />
-      <MarqueeStrip />
-      <FeaturesSection />
-      <HowItWorks />
-      <DemoSection />
-      <TechSection />
-      <WhySection />
-      <TestimonialsSection />
-      <FAQSection />
-      <CTASection />
+      <main className="legal-page">
+        <div className="container">
+          <a href="#" className="legal-back"><ArrowRight size={14} style={{ transform: 'rotate(180deg)' }} /> Back to Home</a>
+          <h1 className="legal-title">{title}</h1>
+          <div className="legal-body">{children}</div>
+        </div>
+      </main>
       <Footer />
+    </>
+  )
+}
+
+/* ====================================
+   PRIVACY POLICY PAGE
+   ==================================== */
+function PrivacyPolicyPage() {
+  return (
+    <LegalPage title="Privacy Policy">
+      <p className="legal-updated">Last updated: 1 March 2026</p>
+
+      <h2>1. Introduction</h2>
+      <p>Loomeé VTO ("we", "our", or "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect data when you use our AI-powered virtual fitting room service available at loomeé.com and via our mobile application.</p>
+
+      <h2>2. Information We Collect</h2>
+      <p><strong>Account Information:</strong> When you register, we collect your name, email address, and password (stored in encrypted form).</p>
+      <p><strong>Body Photos & Measurements:</strong> To provide virtual try-on and size recommendations, we process photos you upload. These images are temporarily transmitted to Google Gemini AI for body analysis. We do not store your raw photos permanently — they are deleted from our servers within 24 hours of processing.</p>
+      <p><strong>Usage Data:</strong> We collect anonymised data about how you interact with the app, including features used, session duration, and device type, to improve our service.</p>
+      <p><strong>Communications:</strong> If you contact us by email, we retain those communications to respond to your enquiry.</p>
+
+      <h2>3. How We Use Your Information</h2>
+      <p>We use your data to provide personalised size recommendations and virtual try-on functionality; to improve and develop the Loomeé VTO service; to communicate service updates or respond to support requests; and to comply with legal obligations. We do not sell your personal data to third parties.</p>
+
+      <h2>4. Third-Party Services</h2>
+      <p><strong>Google Gemini AI:</strong> Body photos are processed via the Google Gemini API for real-time body analysis. Google's processing is governed by Google's Privacy Policy.</p>
+      <p><strong>Render:</strong> Our backend infrastructure is hosted on Render. Data in transit is encrypted via TLS.</p>
+      <p><strong>Analytics:</strong> We use anonymised analytics tools to understand aggregate usage patterns. No personally identifiable information is shared with analytics providers.</p>
+
+      <h2>5. Data Retention</h2>
+      <p>Account data is retained for as long as your account is active. Body photos are deleted within 24 hours of processing. Anonymised usage analytics are retained for up to 24 months. You may request deletion of your account and associated data at any time.</p>
+
+      <h2>6. Your Rights</h2>
+      <p>Depending on your jurisdiction, you may have the right to access, correct, or delete your personal data; withdraw consent at any time; and lodge a complaint with a data protection authority. To exercise any of these rights, contact us at loomeevto@gmail.com.</p>
+
+      <h2>7. Security</h2>
+      <p>We implement industry-standard security measures including TLS encryption, access controls, and regular security reviews. However, no method of transmission over the internet is 100% secure.</p>
+
+      <h2>8. Children's Privacy</h2>
+      <p>Loomeé VTO is not directed at children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us immediately.</p>
+
+      <h2>9. Changes to This Policy</h2>
+      <p>We may update this Privacy Policy periodically. We will notify registered users of material changes by email. Continued use of the service after changes constitutes acceptance of the updated policy.</p>
+
+      <h2>10. Contact</h2>
+      <p>For any privacy-related enquiries, contact us at <a href="mailto:loomeevto@gmail.com">loomeevto@gmail.com</a>.</p>
+    </LegalPage>
+  )
+}
+
+/* ====================================
+   TERMS OF SERVICE PAGE
+   ==================================== */
+function TermsOfServicePage() {
+  return (
+    <LegalPage title="Terms of Service">
+      <p className="legal-updated">Last updated: 1 March 2026</p>
+
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing or using Loomeé VTO ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
+
+      <h2>2. Description of Service</h2>
+      <p>Loomeé VTO is an AI-powered virtual fitting room application that analyses user-submitted body photos to generate personalised size recommendations and virtual outfit previews. The Service is powered by Google Gemini AI and is available on iOS, Android, and via our website.</p>
+
+      <h2>3. Eligibility</h2>
+      <p>You must be at least 13 years of age to use this Service. By using Loomeé VTO, you represent that you meet this age requirement. Users under 18 should have parental or guardian consent.</p>
+
+      <h2>4. User Accounts</h2>
+      <p>You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. You agree to notify us immediately of any unauthorised use of your account at loomeevto@gmail.com.</p>
+
+      <h2>5. Acceptable Use</h2>
+      <p>You agree not to use the Service to upload content that is unlawful, harmful, or violates the rights of others; attempt to reverse-engineer, hack, or disrupt the Service; use automated scripts or bots to access the Service; or misrepresent your identity or affiliation.</p>
+
+      <h2>6. AI Recommendations Disclaimer</h2>
+      <p>Size recommendations and virtual try-on previews generated by Loomeé VTO are provided for guidance only and are based on AI analysis of user-submitted photos. Results may vary depending on photo quality, lighting, and individual body characteristics. We do not guarantee the accuracy of any recommendation. Final purchasing decisions remain the sole responsibility of the user.</p>
+
+      <h2>7. Intellectual Property</h2>
+      <p>All content, branding, software, and technology comprising the Loomeé VTO Service are the exclusive property of Loomeé VTO and are protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works without our express written permission.</p>
+
+      <h2>8. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by law, Loomeé VTO shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of, or inability to use, the Service. Our total liability to you for any claims arising from these Terms shall not exceed the amount you paid us in the 12 months preceding the claim.</p>
+
+      <h2>9. Termination</h2>
+      <p>We reserve the right to suspend or terminate your access to the Service at our discretion, without notice, for conduct that we believe violates these Terms or is harmful to other users, us, or third parties.</p>
+
+      <h2>10. Governing Law</h2>
+      <p>These Terms are governed by applicable law. Any disputes arising from these Terms shall be subject to the exclusive jurisdiction of the relevant courts.</p>
+
+      <h2>11. Changes to Terms</h2>
+      <p>We may modify these Terms at any time. We will provide notice of significant changes. Your continued use of the Service following notice of changes constitutes acceptance of the updated Terms.</p>
+
+      <h2>12. Contact</h2>
+      <p>For questions about these Terms, contact us at <a href="mailto:loomeevto@gmail.com">loomeevto@gmail.com</a>.</p>
+    </LegalPage>
+  )
+}
+
+/* ====================================
+   COOKIE POLICY PAGE
+   ==================================== */
+function CookiePolicyPage() {
+  return (
+    <LegalPage title="Cookie Policy">
+      <p className="legal-updated">Last updated: 1 March 2026</p>
+
+      <h2>1. What Are Cookies</h2>
+      <p>Cookies are small text files placed on your device when you visit a website. They allow the site to remember your preferences, improve your experience, and collect anonymised analytics data. You can control cookies through your browser settings at any time.</p>
+
+      <h2>2. Cookies We Use</h2>
+
+      <h3>Essential Cookies</h3>
+      <p>These cookies are required for the Service to function and cannot be disabled.</p>
+      <div className="cookie-table">
+        <div className="cookie-row cookie-row-header"><span>Name</span><span>Purpose</span><span>Duration</span></div>
+        <div className="cookie-row"><span>loomee_session</span><span>Maintains your login session</span><span>Session</span></div>
+        <div className="cookie-row"><span>loomee_csrf</span><span>Prevents cross-site request forgery</span><span>Session</span></div>
+        <div className="cookie-row"><span>loomee_cookie_consent</span><span>Stores your cookie preference</span><span>1 year</span></div>
+      </div>
+
+      <h3>Functional Cookies</h3>
+      <p>These cookies remember your preferences to personalise your experience.</p>
+      <div className="cookie-table">
+        <div className="cookie-row cookie-row-header"><span>Name</span><span>Purpose</span><span>Duration</span></div>
+        <div className="cookie-row"><span>loomee_prefs</span><span>Stores UI preferences (e.g. language, region)</span><span>6 months</span></div>
+        <div className="cookie-row"><span>loomee_fit_cache</span><span>Caches your fit profile for faster load times</span><span>30 days</span></div>
+      </div>
+
+      <h3>Analytics Cookies</h3>
+      <p>These cookies help us understand how users interact with the Service so we can improve it. All data is anonymised.</p>
+      <div className="cookie-table">
+        <div className="cookie-row cookie-row-header"><span>Name</span><span>Purpose</span><span>Duration</span></div>
+        <div className="cookie-row"><span>loomee_analytics</span><span>Tracks anonymised page views and feature usage</span><span>12 months</span></div>
+        <div className="cookie-row"><span>loomee_perf</span><span>Monitors app performance and error rates</span><span>90 days</span></div>
+      </div>
+
+      <h2>3. Third-Party Cookies</h2>
+      <p>We use Google services for AI processing and analytics. Google may set cookies in accordance with their own Cookie Policy. We do not control Google's cookies and recommend reviewing Google's Privacy & Terms for full details.</p>
+
+      <h2>4. Managing Cookies</h2>
+      <p>You can manage or delete cookies at any time through your browser settings. Please note that disabling essential cookies may affect the functionality of the Service. To withdraw your cookie consent at any time, clear your browser cookies and refresh the page — the consent banner will reappear.</p>
+
+      <h2>5. Changes to This Policy</h2>
+      <p>We may update this Cookie Policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+
+      <h2>6. Contact</h2>
+      <p>For cookie-related enquiries, contact us at <a href="mailto:loomeevto@gmail.com">loomeevto@gmail.com</a>.</p>
+    </LegalPage>
+  )
+}
+
+/* ====================================
+   COOKIE BANNER
+   ==================================== */
+function CookieBanner() {
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const consent = localStorage.getItem('loomee_cookie_consent')
+    if (!consent) setVisible(true)
+  }, [])
+
+  const accept = () => {
+    localStorage.setItem('loomee_cookie_consent', 'accepted')
+    setVisible(false)
+  }
+
+  const decline = () => {
+    localStorage.setItem('loomee_cookie_consent', 'declined')
+    setVisible(false)
+  }
+
+  if (!visible) return null
+
+  return (
+    <div className="cookie-banner">
+      <div className="cookie-banner-content">
+        <div className="cookie-banner-text">
+          <strong>We use cookies 🍪</strong>
+          <p>We use essential, functional, and analytics cookies to improve your experience and understand how Loomeé VTO is used. See our <a href="#/cookies">Cookie Policy</a> for details.</p>
+        </div>
+        <div className="cookie-banner-actions">
+          <button className="cookie-btn cookie-btn-decline" onClick={decline}>Decline</button>
+          <button className="cookie-btn cookie-btn-accept" onClick={accept}>Accept All</button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ====================================
+   APP ROOT
+   ==================================== */
+export default function App() {
+  const [route, setRoute] = useState(window.location.hash)
+
+  useEffect(() => {
+    const onHashChange = () => setRoute(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const renderPage = () => {
+    if (route === '#/privacy') return <PrivacyPolicyPage />
+    if (route === '#/terms') return <TermsOfServicePage />
+    if (route === '#/cookies') return <CookiePolicyPage />
+    return (
+      <>
+        <div className="noise-overlay" />
+        <Navbar />
+        <HeroSection />
+        <MarqueeStrip />
+        <FeaturesSection />
+        <HowItWorks />
+        <DemoSection />
+        <TechSection />
+        <WhySection />
+        <TestimonialsSection />
+        <FAQSection />
+        <CTASection />
+        <Footer />
+      </>
+    )
+  }
+
+  return (
+    <>
+      {renderPage()}
+      <CookieBanner />
     </>
   )
 }
