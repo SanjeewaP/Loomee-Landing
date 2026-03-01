@@ -81,7 +81,7 @@ function Navbar() {
       >
         <div className="navbar-inner">
           <a href="#" className="navbar-logo">
-            <div className="logo-icon">L</div>
+            <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
             Loomeé VTO
           </a>
 
@@ -818,8 +818,8 @@ function Footer() {
         <div className="footer-grid">
           <div className="footer-brand">
             <a href="#" className="navbar-logo">
-              <div className="logo-icon">L</div>
-              Loomeé
+              <img src="/logo-icon.svg" alt="Loomeé logo" className="logo-icon" />
+              Loomeé VTO
             </a>
             <p>
               AI-powered virtual fitting room that helps you shop online with
