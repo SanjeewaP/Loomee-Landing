@@ -1023,15 +1023,15 @@ function Footer() {
 
           <div className="footer-col">
             <h4>Product</h4>
-            <a href="/#features">Features</a>
-            <a href="/#how-it-works">How It Works</a>
-            <a href="/#technology">Technology</a>
-            <a href="/#demo">Live Demo</a>
+            <NavLink href="/#features">Features</NavLink>
+            <NavLink href="/#how-it-works">How It Works</NavLink>
+            <NavLink href="/#technology">Technology</NavLink>
+            <NavLink href="/#demo">Live Demo</NavLink>
           </div>
 
           <div className="footer-col">
             <h4>Resources</h4>
-            <a href="/#faq">FAQ</a>
+            <NavLink href="/#faq">FAQ</NavLink>
             {/* API Docs not yet available — link removed to avoid dead URLs */}
           </div>
 
@@ -1299,9 +1299,22 @@ export default function App() {
 
   // Client-side navigation: push to history and update React state
   const navigate = useCallback((path) => {
+    // Split path and hash (e.g. "/#features" → pathname "/", hash "features")
+    const [base, hash] = path.split('#')
+    const targetPath = base || '/'
     window.history.pushState(null, '', path)
-    setPathname(path)
-    window.scrollTo(0, 0)
+    setPathname(targetPath)
+    if (hash) {
+      // Allow React to render the target page before scrolling to the anchor
+      requestAnimationFrame(() => {
+        const el = document.getElementById(hash)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      })
+    } else {
+      window.scrollTo(0, 0)
+    }
   }, [])
 
   const renderPage = () => {
