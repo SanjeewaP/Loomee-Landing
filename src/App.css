@@ -1461,29 +1461,25 @@
     display: none;
   }
 
-  /* Testimonials: break out of container padding so grid scrolls edge-to-edge */
+  /* Testimonials: negative-margin full-bleed carousel */
   .testimonials-section {
-    overflow-x: hidden;
-  }
-
-  .testimonials-section .container {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
-  .testimonials-section .section-header {
-    padding: 0 24px;
+    overflow-x: hidden; /* prevents page-level horizontal scrollbar */
   }
 
   .testimonials-grid {
     display: flex;
-    grid-template-columns: unset;
+    /* cancel the container's 24px side padding so the track spans full viewport */
+    margin-left: -24px;
+    margin-right: -24px;
+    /* restore a left indent so first card doesn't kiss the edge */
+    padding: 4px 20px 20px;
+    gap: 14px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 4px 24px 16px;
     scrollbar-width: none;
+    /* reset grid properties */
+    grid-template-columns: unset;
   }
 
   .testimonials-grid::-webkit-scrollbar {
@@ -1491,10 +1487,13 @@
   }
 
   .testimonial-card {
-    min-width: calc(100vw - 64px);
+    /* viewport width minus the 20px left padding and ~32px right peek */
+    min-width: calc(100vw - 72px);
+    width: calc(100vw - 72px);
     flex-shrink: 0;
     scroll-snap-align: start;
     box-sizing: border-box;
+    padding: 24px 20px;
   }
 
   .why-grid {
