@@ -1404,7 +1404,8 @@
     display: flex;
   }
 
-  .navbar-actions .btn-ghost {
+  .navbar-actions .btn-ghost,
+  .navbar-actions .btn-primary {
     display: none;
   }
 
