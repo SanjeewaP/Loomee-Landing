@@ -259,7 +259,7 @@ function HeroSection() {
 
         <motion.p variants={fadeUp} className="hero-description">
           Loomeé is an AI-powered virtual fitting room that lets you try on clothes
-          digitally — with real-time body analysis, personalized size recommendations,
+          digitally with real-time body analysis, personalized size recommendations,
           and intelligent style insights.
         </motion.p>
 
