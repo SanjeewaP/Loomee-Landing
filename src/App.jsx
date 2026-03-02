@@ -248,7 +248,7 @@ function HeroSection() {
       >
         <motion.div variants={fadeUp} className="hero-badge">
           <span className="badge-dot" aria-hidden="true" />
-          Powered by Google Gemini AI
+          Powered by Gemini and Replicate
         </motion.div>
 
         <motion.h1 variants={fadeUp}>

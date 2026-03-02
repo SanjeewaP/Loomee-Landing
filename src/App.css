@@ -1396,6 +1396,16 @@
     --section-gap: 96px;
   }
 
+  .navbar-inner {
+    justify-content: center;
+    position: relative;
+  }
+
+  .navbar-actions {
+    position: absolute;
+    right: 0;
+  }
+
   .navbar-links {
     display: none;
   }
@@ -1419,13 +1429,18 @@
   }
 
   .hero-stats {
-    flex-direction: column;
-    gap: 20px;
+    flex-direction: row;
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .hero-stat .stat-value {
+    font-size: 1.4rem;
   }
 
   .hero-stat-divider {
-    width: 40px;
-    height: 1px;
+    width: 1px;
+    height: 32px;
   }
 
   .features-grid {
@@ -1447,7 +1462,24 @@
   }
 
   .testimonials-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    grid-template-columns: unset;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding-bottom: 12px;
+    scrollbar-width: none;
+  }
+
+  .testimonials-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .testimonial-card {
+    min-width: 82vw;
+    flex-shrink: 0;
+    scroll-snap-align: start;
   }
 
   .why-grid {
