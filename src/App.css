@@ -1461,6 +1461,20 @@
     display: none;
   }
 
+  /* Testimonials: break out of container padding so grid scrolls edge-to-edge */
+  .testimonials-section {
+    overflow-x: hidden;
+  }
+
+  .testimonials-section .container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .testimonials-section .section-header {
+    padding: 0 24px;
+  }
+
   .testimonials-grid {
     display: flex;
     grid-template-columns: unset;
@@ -1468,7 +1482,7 @@
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     gap: 16px;
-    padding-bottom: 12px;
+    padding: 4px 24px 16px;
     scrollbar-width: none;
   }
 
@@ -1477,9 +1491,10 @@
   }
 
   .testimonial-card {
-    min-width: 82vw;
+    min-width: calc(100vw - 64px);
     flex-shrink: 0;
     scroll-snap-align: start;
+    box-sizing: border-box;
   }
 
   .why-grid {

@@ -1023,15 +1023,15 @@ function Footer() {
 
           <div className="footer-col">
             <h4>Product</h4>
-            <a href="#features">Features</a>
-            <a href="#how-it-works">How It Works</a>
-            <a href="#technology">Technology</a>
-            <a href="#demo">Live Demo</a>
+            <a href="/#features">Features</a>
+            <a href="/#how-it-works">How It Works</a>
+            <a href="/#technology">Technology</a>
+            <a href="/#demo">Live Demo</a>
           </div>
 
           <div className="footer-col">
             <h4>Resources</h4>
-            <a href="#faq">FAQ</a>
+            <a href="/#faq">FAQ</a>
             {/* API Docs not yet available — link removed to avoid dead URLs */}
           </div>
 
