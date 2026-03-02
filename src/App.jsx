@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion'
+import { useState, useEffect, useRef, createContext, useContext, useCallback } from 'react'
+import { motion, AnimatePresence, useScroll, useTransform, useInView, MotionConfig } from 'framer-motion'
 import {
   Camera, Sparkles, ShoppingBag, ArrowRight, Menu, X, Plus,
   Scan, Ruler, Shirt, Brain, Palette, Shield, Zap, Heart,
@@ -7,6 +7,7 @@ import {
   Smartphone, Upload, Wand2, TrendingUp, Eye, RefreshCw,
   CheckCircle2, ArrowUpRight, Layers, Cpu, Cloud, Database
 } from 'lucide-react'
+import { trackEvent } from './analytics'
 import './App.css'
 
 /* ====================================
@@ -43,8 +44,34 @@ const slideRight = {
 }
 
 /* ====================================
-   CUSTOM CURSOR
+   ROUTING — lightweight SPA router (no extra dependency)
    ==================================== */
+const NavigateContext = createContext(() => {})
+
+function useNavigate() {
+  return useContext(NavigateContext)
+}
+
+/**
+ * NavLink — renders a real <a> element (good for SEO & right-click) that also
+ * performs SPA client-side navigation so the page never fully reloads.
+ */
+function NavLink({ href, children, className, onClick, style }) {
+  const navigate = useNavigate()
+  const handleClick = (e) => {
+    // Let modifier-key clicks (new tab, etc.) fall through
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+    if (href.startsWith('http') || href.startsWith('mailto:')) return
+    e.preventDefault()
+    onClick?.()
+    navigate(href)
+  }
+  return (
+    <a href={href} className={className} style={style} onClick={handleClick}>
+      {children}
+    </a>
+  )
+}
 
 /* ====================================
    NAVBAR
@@ -52,6 +79,8 @@ const slideRight = {
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const menuId = 'mobile-nav-menu'
+  const menuBtnRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
@@ -62,6 +91,19 @@ function Navbar() {
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
+  }, [menuOpen])
+
+  // Escape key closes the mobile menu and returns focus to the trigger button
+  useEffect(() => {
+    if (!menuOpen) return
+    const onKey = (e) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+        menuBtnRef.current?.focus()
+      }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
   }, [menuOpen])
 
   const links = [
@@ -78,12 +120,13 @@ function Navbar() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
+        aria-label="Main navigation"
       >
         <div className="navbar-inner">
-          <a href="#" className="navbar-logo">
+          <NavLink href="/" className="navbar-logo">
             <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
             Loomeé VTO
-          </a>
+          </NavLink>
 
           <div className="navbar-links">
             {links.map(link => (
@@ -93,10 +136,21 @@ function Navbar() {
 
           <div className="navbar-actions">
             <a href="#demo" className="btn-ghost">See Demo</a>
-            <a href="#cta" className="btn-primary">
+            <a
+              href="#cta"
+              className="btn-primary"
+              onClick={() => trackEvent('cta_click', { location: 'navbar' })}
+            >
               Get Started <ArrowRight size={16} />
             </a>
-            <button className="mobile-menu-btn" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+            <button
+              ref={menuBtnRef}
+              className="mobile-menu-btn"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              aria-controls={menuId}
+            >
               <Menu size={24} />
             </button>
           </div>
@@ -106,13 +160,21 @@ function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
+            id={menuId}
             className="mobile-menu-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Navigation menu"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <button className="mobile-close-btn" onClick={() => setMenuOpen(false)} aria-label="Close menu">
+            <button
+              className="mobile-close-btn"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
               <X size={28} />
             </button>
             {links.map((link, i) => (
@@ -130,7 +192,10 @@ function Navbar() {
             <motion.a
               href="#cta"
               className="btn-primary btn-large"
-              onClick={() => setMenuOpen(false)}
+              onClick={() => {
+                setMenuOpen(false)
+                trackEvent('cta_click', { location: 'mobile_menu' })
+              }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
@@ -156,7 +221,7 @@ function MarqueeStrip() {
   const doubled = [...items, ...items]
 
   return (
-    <div className="marquee-strip">
+    <div className="marquee-strip" aria-hidden="true">
       <div className="marquee-track">
         {doubled.map((item, i) => (
           <span key={i}><span className="dot" />{item}</span>
@@ -172,8 +237,8 @@ function MarqueeStrip() {
 function HeroSection() {
   return (
     <section className="hero" id="hero">
-      <div className="hero-bg-gradient" />
-      <div className="hero-grid-lines" />
+      <div className="hero-bg-gradient" aria-hidden="true" />
+      <div className="hero-grid-lines" aria-hidden="true" />
 
       <motion.div
         className="hero-content"
@@ -182,7 +247,7 @@ function HeroSection() {
         variants={staggerContainer}
       >
         <motion.div variants={fadeUp} className="hero-badge">
-          <span className="badge-dot" />
+          <span className="badge-dot" aria-hidden="true" />
           Powered by Google Gemini AI
         </motion.div>
 
@@ -199,7 +264,11 @@ function HeroSection() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="hero-buttons">
-          <a href="#cta" className="btn-primary btn-large">
+          <a
+            href="#cta"
+            className="btn-primary btn-large"
+            onClick={() => trackEvent('cta_click', { location: 'hero' })}
+          >
             Try Loomeé Free <ArrowRight size={18} />
           </a>
           <a href="#how-it-works" className="btn-outline">
@@ -207,17 +276,17 @@ function HeroSection() {
           </a>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="hero-stats">
+        <motion.div variants={fadeUp} className="hero-stats" aria-label="Key statistics">
           <div className="hero-stat">
             <div className="stat-value">95%</div>
             <div className="stat-label">AI Confidence</div>
           </div>
-          <div className="hero-stat-divider" />
+          <div className="hero-stat-divider" aria-hidden="true" />
           <div className="hero-stat">
             <div className="stat-value">{"<"}5s</div>
             <div className="stat-label">Analysis Time</div>
           </div>
-          <div className="hero-stat-divider" />
+          <div className="hero-stat-divider" aria-hidden="true" />
           <div className="hero-stat">
             <div className="stat-value">40%</div>
             <div className="stat-label">Less Returns</div>
@@ -230,6 +299,7 @@ function HeroSection() {
         initial={{ opacity: 0, y: 60 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        aria-hidden="true"
       >
         <div style={{ position: 'relative' }}>
           <PhoneMockup />
@@ -255,7 +325,7 @@ function HeroSection() {
             transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
           >
             <div className="fc-label">Style Advice</div>
-            <div className="fc-value">"Pairs well with denim"</div>
+            <div className="fc-value">&ldquo;Pairs well with denim&rdquo;</div>
           </motion.div>
         </div>
       </motion.div>
@@ -266,7 +336,7 @@ function HeroSection() {
 /* ====================================
    PHONE MOCKUP COMPONENT
    ==================================== */
-function PhoneMockup({ small = false }) {
+function PhoneMockup() {
   return (
     <div className="phone-mockup">
       <div className="phone-notch" />
@@ -322,7 +392,7 @@ function FeaturesSection() {
     {
       icon: <Eye size={22} />,
       title: 'Virtual Try-On Preview',
-      desc: 'See how clothing looks on you with AI-generated overlays using Replicate\'s advanced image generation models.',
+      desc: "See how clothing looks on you with AI-generated overlays using Replicate's advanced image generation models.",
     },
     {
       icon: <Brain size={22} />,
@@ -361,7 +431,7 @@ function FeaturesSection() {
         >
           {features.map((feature, i) => (
             <motion.div key={i} className="feature-card" variants={fadeUp}>
-              <div className="feature-icon">{feature.icon}</div>
+              <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.desc}</p>
             </motion.div>
@@ -390,7 +460,7 @@ function HowItWorks() {
       num: '02',
       icon: <Shirt size={28} />,
       title: 'Browse & Select Clothing',
-      desc: 'Explore our clothing catalog or upload any garment image. Our AI instantly analyzes the clothing\'s style, color, fabric, and sizing.',
+      desc: "Explore our clothing catalog or upload any garment image. Our AI instantly analyzes the clothing's style, color, fabric, and sizing.",
     },
     {
       num: '03',
@@ -416,21 +486,21 @@ function HowItWorks() {
           </p>
         </motion.div>
 
-        <motion.div
+        <motion.ol
           className="how-steps"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
           {steps.map((step, i) => (
-            <motion.div key={i} className="how-step" variants={fadeUp}>
-              <div className="how-step-number">{step.num}</div>
-              <div className="how-step-icon">{step.icon}</div>
+            <motion.li key={i} className="how-step" variants={fadeUp}>
+              <div className="how-step-number" aria-hidden="true">{step.num}</div>
+              <div className="how-step-icon" aria-hidden="true">{step.icon}</div>
               <h3>{step.title}</h3>
               <p>{step.desc}</p>
-            </motion.div>
+            </motion.li>
           ))}
-        </motion.div>
+        </motion.ol>
       </div>
     </section>
   )
@@ -469,28 +539,32 @@ function DemoSection() {
               in under five seconds.
             </p>
 
-            <div className="demo-features-list">
+            <ul className="demo-features-list">
               {features.map((f, i) => (
-                <motion.div
+                <motion.li
                   key={i}
                   className="demo-feature-item"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: i * 0.1 + 0.3 }}
                 >
-                  <div className="check-icon"><CheckCircle2 size={14} /></div>
+                  <div className="check-icon" aria-hidden="true"><CheckCircle2 size={14} /></div>
                   {f}
-                </motion.div>
+                </motion.li>
               ))}
-            </div>
+            </ul>
 
-            <a href="#cta" className="btn-primary btn-large">
+            <a
+              href="#cta"
+              className="btn-primary btn-large"
+              onClick={() => trackEvent('cta_click', { location: 'demo' })}
+            >
               Try It Now <ArrowRight size={18} />
             </a>
           </motion.div>
 
-          <motion.div className="demo-visual" variants={slideRight}>
-            <PhoneMockup small />
+          <motion.div className="demo-visual" variants={slideRight} aria-hidden="true">
+            <PhoneMockup />
           </motion.div>
         </motion.div>
       </div>
@@ -541,7 +615,7 @@ function TechSection() {
         >
           {techs.map((tech, i) => (
             <motion.div key={i} className="tech-card" variants={fadeUp}>
-              <div className="tech-card-icon">{tech.icon}</div>
+              <div className="tech-card-icon" aria-hidden="true">{tech.icon}</div>
               <h4>{tech.name}</h4>
               <p>{tech.desc}</p>
             </motion.div>
@@ -574,7 +648,7 @@ function WhySection() {
     },
     {
       title: 'Built for Everyone',
-      desc: 'Whether you\'re a student shopping online or a fashion enthusiast exploring styles, Loomeé adapts to your needs.',
+      desc: "Whether you're a student shopping online or a fashion enthusiast exploring styles, Loomeé adapts to your needs.",
     },
   ]
 
@@ -602,7 +676,7 @@ function WhySection() {
         >
           {reasons.map((reason, i) => (
             <motion.div key={i} className="why-card" variants={fadeUp}>
-              <div className="why-card-number">{String(i + 1).padStart(2, '0')}</div>
+              <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
               <p>{reason.desc}</p>
             </motion.div>
@@ -634,7 +708,7 @@ function TestimonialsSection() {
       initials: 'MD',
     },
     {
-      text: '"As someone who struggles with inconsistent sizing across brands, Loomeé\'s per-garment analysis is a game-changer. Love the confidence scores."',
+      text: "\"As someone who struggles with inconsistent sizing across brands, Loomeé's per-garment analysis is a game-changer. Love the confidence scores.\"",
       name: 'Priya M.',
       role: 'Style Blogger',
       initials: 'PM',
@@ -661,19 +735,21 @@ function TestimonialsSection() {
           variants={staggerContainer}
         >
           {testimonials.map((t, i) => (
-            <motion.div key={i} className="testimonial-card" variants={fadeUp}>
-              <div className="testimonial-stars">
-                {[...Array(5)].map((_, j) => <Star key={j} className="star" size={16} fill="#C4963A" />)}
+            <motion.article key={i} className="testimonial-card" variants={fadeUp}>
+              <div className="testimonial-stars" aria-label="5 out of 5 stars">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} className="star" size={16} fill="#C4963A" aria-hidden="true" />
+                ))}
               </div>
               <p className="testimonial-text">{t.text}</p>
               <div className="testimonial-author">
-                <div className="testimonial-avatar">{t.initials}</div>
+                <div className="testimonial-avatar" aria-hidden="true">{t.initials}</div>
                 <div className="testimonial-info">
                   <h4>{t.name}</h4>
                   <p>{t.role}</p>
                 </div>
               </div>
-            </motion.div>
+            </motion.article>
           ))}
         </motion.div>
       </div>
@@ -682,7 +758,7 @@ function TestimonialsSection() {
 }
 
 /* ====================================
-   FAQ SECTION
+   FAQ SECTION — accessible accordion
    ==================================== */
 function FAQSection() {
   const ref = useRef(null)
@@ -708,7 +784,7 @@ function FAQSection() {
     },
     {
       q: 'Does Loomeé work with any clothing brand?',
-      a: 'Yes! You can browse our built-in catalog or upload any clothing image. Our AI analyzes the garment\'s visual properties — color, style, fabric type — and provides recommendations regardless of the brand.',
+      a: "Yes! You can browse our built-in catalog or upload any clothing image. Our AI analyzes the garment's visual properties — color, style, fabric type — and provides recommendations regardless of the brand.",
     },
     {
       q: 'What platforms is Loomeé available on?',
@@ -738,37 +814,160 @@ function FAQSection() {
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
         >
-          {faqs.map((faq, i) => (
-            <motion.div
-              key={i}
-              className={`faq-item ${openIndex === i ? 'open' : ''}`}
-              variants={fadeUp}
-            >
-              <button
-                className="faq-question"
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+          {faqs.map((faq, i) => {
+            const isOpen = openIndex === i
+            const headingId = `faq-heading-${i}`
+            const panelId = `faq-panel-${i}`
+
+            return (
+              <motion.div
+                key={i}
+                className={`faq-item ${isOpen ? 'open' : ''}`}
+                variants={fadeUp}
               >
-                {faq.q}
-                <span className="faq-icon"><Plus size={18} /></span>
-              </button>
-              <AnimatePresence>
-                {openIndex === i && (
-                  <motion.div
-                    className="faq-answer"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <p>{faq.a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                <button
+                  id={headingId}
+                  className="faq-question"
+                  onClick={() => setOpenIndex(isOpen ? null : i)}
+                  aria-expanded={isOpen}
+                  aria-controls={panelId}
+                >
+                  {faq.q}
+                  <span className="faq-icon" aria-hidden="true"><Plus size={18} /></span>
+                </button>
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      id={panelId}
+                      className="faq-answer"
+                      role="region"
+                      aria-labelledby={headingId}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    >
+                      <p>{faq.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>
+  )
+}
+
+/* ====================================
+   WAITLIST FORM
+   ==================================== */
+function WaitlistForm() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [status, setStatus] = useState('idle') // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState('')
+
+  const validate = () => {
+    if (!name.trim()) return 'Please enter your name.'
+    if (!email.trim()) return 'Please enter your email address.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return 'Please enter a valid email address.'
+    return null
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setErrorMsg('')
+    const err = validate()
+    if (err) {
+      setStatus('error')
+      setErrorMsg(err)
+      return
+    }
+
+    setStatus('loading')
+    const endpoint = import.meta.env.VITE_WAITLIST_ENDPOINT
+
+    if (endpoint) {
+      try {
+        const res = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name.trim(), email: email.trim() }),
+        })
+        if (!res.ok) throw new Error('Server error')
+        setStatus('success')
+        trackEvent('waitlist_submit_success', { source: 'endpoint' })
+      } catch {
+        setStatus('error')
+        setErrorMsg('Something went wrong. Please try again.')
+        trackEvent('waitlist_submit_error', { source: 'endpoint' })
+      }
+    } else {
+      // Fallback: save to localStorage when no endpoint is configured
+      try {
+        const existing = JSON.parse(localStorage.getItem('loomee_waitlist') || '[]')
+        existing.push({ name: name.trim(), email: email.trim(), date: new Date().toISOString() })
+        localStorage.setItem('loomee_waitlist', JSON.stringify(existing))
+        setStatus('success')
+        trackEvent('waitlist_submit_success', { source: 'localStorage' })
+      } catch {
+        setStatus('error')
+        setErrorMsg('Unable to save. Please try again.')
+        trackEvent('waitlist_submit_error', { source: 'localStorage' })
+      }
+    }
+  }
+
+  if (status === 'success') {
+    return (
+      <div className="waitlist-success" role="status" aria-live="polite">
+        <CheckCircle2 size={36} aria-hidden="true" />
+        <h3>You&rsquo;re on the list!</h3>
+        <p>We&rsquo;ll notify you at <strong>{email}</strong> when Loomeé launches.</p>
+      </div>
+    )
+  }
+
+  return (
+    <form className="waitlist-form" onSubmit={handleSubmit} noValidate aria-label="Join the waitlist">
+      <div className="waitlist-fields">
+        <input
+          type="text"
+          placeholder="Your name"
+          value={name}
+          onChange={e => { setName(e.target.value); if (status === 'error') setStatus('idle') }}
+          disabled={status === 'loading'}
+          autoComplete="name"
+          aria-label="Your name"
+          aria-required="true"
+        />
+        <input
+          type="email"
+          placeholder="Your email"
+          value={email}
+          onChange={e => { setEmail(e.target.value); if (status === 'error') setStatus('idle') }}
+          disabled={status === 'loading'}
+          autoComplete="email"
+          aria-label="Your email address"
+          aria-required="true"
+        />
+      </div>
+      {status === 'error' && errorMsg && (
+        <p className="waitlist-error" role="alert">{errorMsg}</p>
+      )}
+      <button
+        type="submit"
+        className="btn-white"
+        disabled={status === 'loading'}
+      >
+        {status === 'loading'
+          ? 'Joining…'
+          : <><span>Join the Waitlist</span> <ArrowRight size={16} aria-hidden="true" /></>
+        }
+      </button>
+    </form>
   )
 }
 
@@ -793,15 +992,10 @@ function CTASection() {
             Join Loomeé and shop online with confidence. No more wrong sizes,
             no more returns — just clothes that fit you.
           </p>
-          <div className="cta-buttons">
-            <div className="btn-coming-soon">
-              <span className="coming-soon-dot" />
-              App Coming Soon
-            </div>
-            <a href="#features" className="btn-glass">
-              Explore Features
-            </a>
-          </div>
+          <WaitlistForm />
+          <a href="#features" className="btn-glass cta-explore-btn">
+            Explore Features
+          </a>
         </motion.div>
       </div>
     </section>
@@ -817,10 +1011,10 @@ function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-brand">
-            <a href="#" className="navbar-logo">
+            <NavLink href="/" className="navbar-logo">
               <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
               Loomeé VTO
-            </a>
+            </NavLink>
             <p>
               AI-powered virtual fitting room that helps you shop online with
               confidence. Built with Google Gemini, Flutter, and love.
@@ -838,14 +1032,14 @@ function Footer() {
           <div className="footer-col">
             <h4>Resources</h4>
             <a href="#faq">FAQ</a>
-            <a href="#">API Docs</a>
+            {/* API Docs not yet available — link removed to avoid dead URLs */}
           </div>
 
           <div className="footer-col">
             <h4>Legal</h4>
-            <a href="#/privacy">Privacy Policy</a>
-            <a href="#/terms">Terms of Service</a>
-            <a href="#/cookies">Cookie Policy</a>
+            <NavLink href="/privacy">Privacy Policy</NavLink>
+            <NavLink href="/terms">Terms of Service</NavLink>
+            <NavLink href="/cookies">Cookie Policy</NavLink>
             <a href="mailto:loomeevto@gmail.com">Contact</a>
           </div>
         </div>
@@ -857,7 +1051,11 @@ function Footer() {
               <Github size={16} />
             </a>
             <a href="https://www.linkedin.com/company/loomeevto/posts/?feedView=all" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="LinkedIn">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
             </a>
             <a href="https://www.instagram.com/loomeevto/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
               <Instagram size={16} />
@@ -876,14 +1074,18 @@ function Footer() {
    LEGAL PAGE WRAPPER
    ==================================== */
 function LegalPage({ title, children }) {
+  const navigate = useNavigate()
   useEffect(() => { window.scrollTo(0, 0) }, [])
   return (
     <>
-      <div className="noise-overlay" />
+      <div className="noise-overlay" aria-hidden="true" />
       <Navbar />
       <main className="legal-page">
         <div className="container">
-          <a href="#" className="legal-back"><ArrowRight size={14} style={{ transform: 'rotate(180deg)' }} /> Back to Home</a>
+          <button className="legal-back" onClick={() => navigate('/')}>
+            <ArrowRight size={14} style={{ transform: 'rotate(180deg)' }} aria-hidden="true" />
+            Back to Home
+          </button>
           <h1 className="legal-title">{title}</h1>
           <div className="legal-body">{children}</div>
         </div>
@@ -902,11 +1104,11 @@ function PrivacyPolicyPage() {
       <p className="legal-updated">Last updated: 1 March 2026</p>
 
       <h2>1. Introduction</h2>
-      <p>Loomeé VTO ("we", "our", or "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect data when you use our AI-powered virtual fitting room service available at loomeé.com and via our mobile application.</p>
+      <p>Loomeé VTO (&ldquo;we&rdquo;, &ldquo;our&rdquo;, or &ldquo;us&rdquo;) is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect data when you use our AI-powered virtual fitting room service available at loomeé.com and via our mobile application.</p>
 
       <h2>2. Information We Collect</h2>
       <p><strong>Account Information:</strong> When you register, we collect your name, email address, and password (stored in encrypted form).</p>
-      <p><strong>Body Photos & Measurements:</strong> To provide virtual try-on and size recommendations, we process photos you upload. These images are temporarily transmitted to Google Gemini AI for body analysis. We do not store your raw photos permanently — they are deleted from our servers within 24 hours of processing.</p>
+      <p><strong>Body Photos &amp; Measurements:</strong> To provide virtual try-on and size recommendations, we process photos you upload. These images are temporarily transmitted to Google Gemini AI for body analysis. We do not store your raw photos permanently — they are deleted from our servers within 24 hours of processing.</p>
       <p><strong>Usage Data:</strong> We collect anonymised data about how you interact with the app, including features used, session duration, and device type, to improve our service.</p>
       <p><strong>Communications:</strong> If you contact us by email, we retain those communications to respond to your enquiry.</p>
 
@@ -914,7 +1116,7 @@ function PrivacyPolicyPage() {
       <p>We use your data to provide personalised size recommendations and virtual try-on functionality; to improve and develop the Loomeé VTO service; to communicate service updates or respond to support requests; and to comply with legal obligations. We do not sell your personal data to third parties.</p>
 
       <h2>4. Third-Party Services</h2>
-      <p><strong>Google Gemini AI:</strong> Body photos are processed via the Google Gemini API for real-time body analysis. Google's processing is governed by Google's Privacy Policy.</p>
+      <p><strong>Google Gemini AI:</strong> Body photos are processed via the Google Gemini API for real-time body analysis. Google&rsquo;s processing is governed by Google&rsquo;s Privacy Policy.</p>
       <p><strong>Render:</strong> Our backend infrastructure is hosted on Render. Data in transit is encrypted via TLS.</p>
       <p><strong>Analytics:</strong> We use anonymised analytics tools to understand aggregate usage patterns. No personally identifiable information is shared with analytics providers.</p>
 
@@ -927,7 +1129,7 @@ function PrivacyPolicyPage() {
       <h2>7. Security</h2>
       <p>We implement industry-standard security measures including TLS encryption, access controls, and regular security reviews. However, no method of transmission over the internet is 100% secure.</p>
 
-      <h2>8. Children's Privacy</h2>
+      <h2>8. Children&rsquo;s Privacy</h2>
       <p>Loomeé VTO is not directed at children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us immediately.</p>
 
       <h2>9. Changes to This Policy</h2>
@@ -948,7 +1150,7 @@ function TermsOfServicePage() {
       <p className="legal-updated">Last updated: 1 March 2026</p>
 
       <h2>1. Acceptance of Terms</h2>
-      <p>By accessing or using Loomeé VTO ("the Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
+      <p>By accessing or using Loomeé VTO (&ldquo;the Service&rdquo;), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service.</p>
 
       <h2>2. Description of Service</h2>
       <p>Loomeé VTO is an AI-powered virtual fitting room application that analyses user-submitted body photos to generate personalised size recommendations and virtual outfit previews. The Service is powered by Google Gemini AI and is available on iOS, Android, and via our website.</p>
@@ -1025,7 +1227,7 @@ function CookiePolicyPage() {
       </div>
 
       <h2>3. Third-Party Cookies</h2>
-      <p>We use Google services for AI processing and analytics. Google may set cookies in accordance with their own Cookie Policy. We do not control Google's cookies and recommend reviewing Google's Privacy & Terms for full details.</p>
+      <p>We use Google services for AI processing and analytics. Google may set cookies in accordance with their own Cookie Policy. We do not control Google&rsquo;s cookies and recommend reviewing Google&rsquo;s Privacy &amp; Terms for full details.</p>
 
       <h2>4. Managing Cookies</h2>
       <p>You can manage or delete cookies at any time through your browser settings. Please note that disabling essential cookies may affect the functionality of the Service. To withdraw your cookie consent at any time, clear your browser cookies and refresh the page — the consent banner will reappear.</p>
@@ -1063,11 +1265,15 @@ function CookieBanner() {
   if (!visible) return null
 
   return (
-    <div className="cookie-banner">
+    <div className="cookie-banner" role="region" aria-label="Cookie consent">
       <div className="cookie-banner-content">
         <div className="cookie-banner-text">
           <strong>We use cookies 🍪</strong>
-          <p>We use essential, functional, and analytics cookies to improve your experience and understand how Loomeé VTO is used. See our <a href="#/cookies">Cookie Policy</a> for details.</p>
+          <p>
+            We use essential, functional, and analytics cookies to improve your experience
+            and understand how Loomeé VTO is used. See our{' '}
+            <NavLink href="/cookies">Cookie Policy</NavLink> for details.
+          </p>
         </div>
         <div className="cookie-banner-actions">
           <button className="cookie-btn cookie-btn-decline" onClick={decline}>Decline</button>
@@ -1082,41 +1288,58 @@ function CookieBanner() {
    APP ROOT
    ==================================== */
 export default function App() {
-  const [route, setRoute] = useState(window.location.hash)
+  const [pathname, setPathname] = useState(() => window.location.pathname)
 
+  // Keep state in sync with browser back/forward buttons
   useEffect(() => {
-    const onHashChange = () => setRoute(window.location.hash)
-    window.addEventListener('hashchange', onHashChange)
-    return () => window.removeEventListener('hashchange', onHashChange)
+    const onPop = () => setPathname(window.location.pathname)
+    window.addEventListener('popstate', onPop)
+    return () => window.removeEventListener('popstate', onPop)
+  }, [])
+
+  // Client-side navigation: push to history and update React state
+  const navigate = useCallback((path) => {
+    window.history.pushState(null, '', path)
+    setPathname(path)
+    window.scrollTo(0, 0)
   }, [])
 
   const renderPage = () => {
-    if (route === '#/privacy') return <PrivacyPolicyPage />
-    if (route === '#/terms') return <TermsOfServicePage />
-    if (route === '#/cookies') return <CookiePolicyPage />
+    if (pathname === '/privacy') return <PrivacyPolicyPage />
+    if (pathname === '/terms') return <TermsOfServicePage />
+    if (pathname === '/cookies') return <CookiePolicyPage />
     return (
       <>
-        <div className="noise-overlay" />
+        <div className="noise-overlay" aria-hidden="true" />
         <Navbar />
-        <HeroSection />
-        <MarqueeStrip />
-        <FeaturesSection />
-        <HowItWorks />
-        <DemoSection />
-        <TechSection />
-        <WhySection />
-        <TestimonialsSection />
-        <FAQSection />
-        <CTASection />
+        <main id="main-content">
+          <HeroSection />
+          <MarqueeStrip />
+          <FeaturesSection />
+          <HowItWorks />
+          <DemoSection />
+          <TechSection />
+          <WhySection />
+          <TestimonialsSection />
+          <FAQSection />
+          <CTASection />
+        </main>
         <Footer />
       </>
     )
   }
 
   return (
-    <>
-      {renderPage()}
-      <CookieBanner />
-    </>
+    <NavigateContext.Provider value={navigate}>
+      {/*
+        MotionConfig reducedMotion="user" automatically disables or minimises
+        all framer-motion animations when the OS prefers-reduced-motion setting
+        is enabled — no extra JS needed.
+      */}
+      <MotionConfig reducedMotion="user">
+        {renderPage()}
+        <CookieBanner />
+      </MotionConfig>
+    </NavigateContext.Provider>
   )
 }
