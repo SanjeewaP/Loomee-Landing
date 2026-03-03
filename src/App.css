@@ -446,11 +446,10 @@
 }
 
 .phone-outfit-silhouette {
-  width: 100px;
-  height: 252px;
+  width: 88px;
+  height: 229px; /* maintains viewBox 100:260 aspect ratio */
   flex-shrink: 0;
   display: block;
-  /* no background — the SVG paths handle all colouring */
 }
 
 .phone-scan-line {
