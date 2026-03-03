@@ -447,23 +447,10 @@
 
 .phone-outfit-silhouette {
   width: 100px;
-  height: 200px;
-  background: linear-gradient(180deg, rgba(181, 103, 61, 0.15), rgba(196, 128, 106, 0.08));
-  border-radius: 50px 50px 30px 30px;
-  position: relative;
-}
-
-.phone-outfit-silhouette::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(181, 103, 61, 0.12);
-  border: 1px solid rgba(181, 103, 61, 0.2);
+  height: 252px;
+  flex-shrink: 0;
+  display: block;
+  /* no background — the SVG paths handle all colouring */
 }
 
 .phone-scan-line {

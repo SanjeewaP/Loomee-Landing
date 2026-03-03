@@ -347,7 +347,67 @@ function PhoneMockup() {
             <p>Virtual Try-On</p>
           </div>
           <div className="phone-outfit-preview">
-            <div className="phone-outfit-silhouette" />
+            {/* Human figure SVG — replaces the old CSS blob */}
+            <svg
+              className="phone-outfit-silhouette"
+              viewBox="0 0 100 252"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+            >
+              {/* Left arm */}
+              <path
+                d="M37 63 C27 70 18 84 16 108 C21 112 27 110 30 106 C32 88 38 76 46 70 Z"
+                fill="rgba(196,150,106,0.18)" stroke="rgba(181,103,61,0.22)" strokeWidth="1"
+              />
+              {/* Right arm */}
+              <path
+                d="M63 63 C73 70 82 84 84 108 C79 112 73 110 70 106 C68 88 62 76 54 70 Z"
+                fill="rgba(196,150,106,0.18)" stroke="rgba(181,103,61,0.22)" strokeWidth="1"
+              />
+              {/* Torso — shoulders taper to waist then flare to hips */}
+              <path
+                d="M37 61
+                   C28 68 24 88 26 112
+                   C23 122 22 136 28 148
+                   L30 220 L70 220
+                   L72 148
+                   C78 136 77 122 74 112
+                   C76 88 72 68 63 61
+                   C57 56 43 56 37 61 Z"
+                fill="rgba(181,103,61,0.12)" stroke="rgba(181,103,61,0.22)" strokeWidth="1.2"
+              />
+              {/* Waist belt hint */}
+              <path
+                d="M27 112 C38 118 50 119 73 112"
+                stroke="rgba(181,103,61,0.32)" strokeWidth="1.5"
+                strokeLinecap="round" fill="none"
+              />
+              {/* Left leg */}
+              <path
+                d="M30 218 C28 232 28 244 30 250 C34 253 42 253 44 250 C46 244 46 232 44 218 Z"
+                fill="rgba(196,150,106,0.16)" stroke="rgba(181,103,61,0.22)" strokeWidth="1"
+              />
+              {/* Right leg */}
+              <path
+                d="M56 218 C54 232 54 244 56 250 C60 253 68 253 70 250 C72 244 72 232 70 218 Z"
+                fill="rgba(196,150,106,0.16)" stroke="rgba(181,103,61,0.22)" strokeWidth="1"
+              />
+              {/* Neck */}
+              <path
+                d="M44 46 L44 60 C47 62 53 62 56 60 L56 46 C53 43 47 43 44 46 Z"
+                fill="rgba(196,150,106,0.18)"
+              />
+              {/* Head */}
+              <circle cx="50" cy="26" r="22"
+                fill="rgba(196,150,106,0.20)" stroke="rgba(181,103,61,0.30)" strokeWidth="1.5"
+              />
+              {/* Hair — soft arc on top of head */}
+              <path
+                d="M29 22 C30 6 70 6 71 22"
+                fill="rgba(181,103,61,0.22)" stroke="none"
+              />
+            </svg>
             <div className="phone-scan-line" />
             <div className="phone-ai-badge">
               <Sparkles size={10} style={{ marginRight: 4 }} />
