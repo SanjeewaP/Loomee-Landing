@@ -536,7 +536,11 @@ function FeaturesSection() {
           variants={staggerContainer}
         >
           {features.map((feature, i) => (
-            <motion.div key={i} className="feature-card" variants={popIn}>
+            <motion.div
+              key={i}
+              className="feature-card"
+              variants={i % 3 === 0 ? slideLeft : i % 3 === 2 ? slideRight : fadeUp}
+            >
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.desc}</p>
@@ -599,7 +603,11 @@ function HowItWorks() {
           variants={staggerContainer}
         >
           {steps.map((step, i) => (
-            <motion.li key={i} className="how-step" variants={popIn}>
+            <motion.li
+              key={i}
+              className="how-step"
+              variants={i === 0 ? slideLeft : i === 2 ? slideRight : fadeUp}
+            >
               <div className="how-step-number" aria-hidden="true">{step.num}</div>
               <div className="how-step-icon" aria-hidden="true">{step.icon}</div>
               <h3>{step.title}</h3>
