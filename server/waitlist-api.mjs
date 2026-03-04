@@ -215,13 +215,23 @@ const server = createServer(async (req, res) => {
         await sendWithResend({
           from: WAITLIST_AUTOREPLY_FROM_EMAIL,
           to: [email],
-          subject: `You're on the ${APP_NAME} waitlist`,
+          subject: `Welcome to the ${APP_NAME} waitlist`,
           html: `
             <p>Hi ${escapedName},</p>
-            <p>Thanks for joining the ${APP_NAME} waitlist. We will email you as soon as the app is ready.</p>
-            <p>- ${APP_NAME} Team</p>
+            <p>Thanks for joining the ${APP_NAME} waitlist. You're officially on the list.</p>
+            <p>We're putting the finishing touches on the app, and we'll email you as soon as early access opens.</p>
+            <p>Appreciate your support,</p>
+            <p>The ${APP_NAME} Team</p>
           `,
-          text: `Hi ${name}, thanks for joining the ${APP_NAME} waitlist. We will email you when the app is ready.`,
+          text: [
+            `Hi ${name},`,
+            '',
+            `Thanks for joining the ${APP_NAME} waitlist. You're officially on the list.`,
+            `We're putting the finishing touches on the app, and we'll email you as soon as early access opens.`,
+            '',
+            'Appreciate your support,',
+            `The ${APP_NAME} Team`,
+          ].join('\n'),
         })
       } catch (autoReplyError) {
         // Do not fail signup if optional auto-reply cannot be sent.
