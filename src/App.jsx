@@ -13,60 +13,26 @@ import './App.css'
 /* ====================================
    ANIMATION VARIANTS
    ==================================== */
-const scrollEase = [0.22, 1, 0.36, 1]
+const ease = [0.25, 0.46, 0.45, 0.94]
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: scrollEase } }
+const reveal = {
+  hidden: { opacity: 0, y: 18 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease } }
 }
 
-const fadeIn = {
-  hidden: { y: 22, clipPath: 'inset(0 0 100% 0 round 28px)' },
-  visible: { y: 0, clipPath: 'inset(0 0 0% 0 round 28px)', transition: { duration: 0.85, ease: scrollEase } }
+const revealSoft = {
+  hidden: { opacity: 0, y: 12, scale: 0.985 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.9, ease } }
 }
 
-const staggerContainer = {
+const stagger = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } }
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } }
 }
 
-const scaleIn = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: scrollEase } }
-}
-
-const slideLeft = {
-  hidden: { opacity: 0, x: -28 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: scrollEase } }
-}
-
-const slideRight = {
-  hidden: { opacity: 0, x: 28 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: scrollEase } }
-}
-
-const popIn = {
-  hidden: { opacity: 0, y: 22 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.62, ease: scrollEase }
-  }
-}
-
-const flipUp = {
-  hidden: { opacity: 0, y: 34 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.72, ease: scrollEase } }
-}
-
-const staggerSlow = {
+const staggerMed = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.12 } }
-}
-
-const clipReveal = {
-  hidden: { x: 24, clipPath: 'inset(0 100% 0 0 round 24px)' },
-  visible: { x: 0, clipPath: 'inset(0 0 0 0 round 24px)', transition: { duration: 0.9, ease: scrollEase } }
+  visible: { transition: { staggerChildren: 0.11, delayChildren: 0.07 } }
 }
 
 /* ====================================
@@ -311,26 +277,26 @@ function HeroSection() {
         className="hero-content"
         initial="hidden"
         animate="visible"
-        variants={staggerContainer}
+        variants={stagger}
       >
-        <motion.div variants={popIn} className="hero-badge">
+        <motion.div variants={reveal} className="hero-badge">
           <span className="badge-dot" aria-hidden="true" />
           Powered by Gemini and Replicate
         </motion.div>
 
-        <motion.h1 variants={popIn}>
+        <motion.h1 variants={reveal}>
           Your style,
           <br />
           <span className="highlight">perfectly fitted.</span>
         </motion.h1>
 
-        <motion.p variants={popIn} className="hero-description">
+        <motion.p variants={reveal} className="hero-description">
           Loomeé is an AI-powered virtual fitting room that lets you try on clothes
           digitally — with real-time body analysis, personalized size recommendations,
           and intelligent style insights.
         </motion.p>
 
-        <motion.div variants={popIn} className="hero-buttons">
+        <motion.div variants={reveal} className="hero-buttons">
           <a
             href="#cta"
             className="btn-primary btn-large"
@@ -343,7 +309,7 @@ function HeroSection() {
           </a>
         </motion.div>
 
-        <motion.div variants={popIn} className="hero-stats" aria-label="Key statistics">
+        <motion.div variants={reveal} className="hero-stats" aria-label="Key statistics">
           <div className="hero-stat">
             <div className="stat-value"><CountUp value="95%" /></div>
             <div className="stat-label">AI Confidence</div>
@@ -364,15 +330,9 @@ function HeroSection() {
       <motion.div
         className="hero-mockup-area"
         style={{ y: mockupY }}
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0, x: 26, y: 22 },
-          visible: {
-            opacity: 1, x: 0, y: 0,
-            transition: { duration: 0.85, ease: scrollEase, delay: 0.45 }
-          }
-        }}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease, delay: 0.4 }}
         aria-hidden="true"
       >
         <div style={{ position: 'relative' }}>
@@ -505,7 +465,7 @@ function FeaturesSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">Features</div>
           <h2 className="section-title">Empower Your Wardrobe with AI</h2>
@@ -519,13 +479,13 @@ function FeaturesSection() {
           className="features-grid"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
+          variants={stagger}
         >
           {features.map((feature, i) => (
             <motion.div
               key={i}
               className="feature-card"
-              variants={i % 3 === 0 ? slideLeft : i % 3 === 2 ? slideRight : fadeUp}
+              variants={reveal}
             >
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
@@ -573,7 +533,7 @@ function HowItWorks() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">How It Works</div>
           <h2 className="section-title">Three Steps to Your Perfect Fit</h2>
@@ -586,13 +546,13 @@ function HowItWorks() {
           className="how-steps"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
+          variants={stagger}
         >
           {steps.map((step, i) => (
             <motion.li
               key={i}
               className="how-step"
-              variants={i === 0 ? slideLeft : i === 2 ? slideRight : fadeUp}
+              variants={reveal}
             >
               <div className="how-step-number" aria-hidden="true">{step.num}</div>
               <div className="how-step-icon" aria-hidden="true">{step.icon}</div>
@@ -628,9 +588,9 @@ function DemoSection() {
           className="demo-container"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeIn}
+          variants={stagger}
         >
-          <motion.div className="demo-content" variants={slideLeft}>
+          <motion.div className="demo-content" variants={reveal}>
             <div className="section-eyebrow">Live Demo</div>
             <h2>See Loomeé in Action</h2>
             <p>
@@ -641,16 +601,10 @@ function DemoSection() {
 
             <ul className="demo-features-list">
               {features.map((f, i) => (
-                <motion.li
-                  key={i}
-                  className="demo-feature-item"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: i * 0.1 + 0.3 }}
-                >
+                <li key={i} className="demo-feature-item">
                   <div className="check-icon" aria-hidden="true"><CheckCircle2 size={14} /></div>
                   {f}
-                </motion.li>
+                </li>
               ))}
             </ul>
 
@@ -663,7 +617,7 @@ function DemoSection() {
             </a>
           </motion.div>
 
-          <motion.div className="demo-visual" variants={clipReveal} aria-hidden="true">
+          <motion.div className="demo-visual" variants={reveal} aria-hidden="true">
             <PhoneMockup />
           </motion.div>
         </motion.div>
@@ -697,7 +651,7 @@ function TechSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">Technology</div>
           <h2 className="section-title">Built with Modern Tech</h2>
@@ -711,10 +665,10 @@ function TechSection() {
           className="tech-grid"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
+          variants={stagger}
         >
           {techs.map((tech, i) => (
-            <motion.div key={i} className="tech-card" variants={popIn}>
+            <motion.div key={i} className="tech-card" variants={reveal}>
               <div className="tech-card-icon" aria-hidden="true">{tech.icon}</div>
               <h4>{tech.name}</h4>
               <p>{tech.desc}</p>
@@ -759,7 +713,7 @@ function WhySection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">Why Loomeé</div>
           <h2 className="section-title">Why Choose Loomeé?</h2>
@@ -772,11 +726,10 @@ function WhySection() {
           className="why-grid"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
-          style={{ perspective: 1000 }}
+          variants={stagger}
         >
           {reasons.map((reason, i) => (
-            <motion.div key={i} className="why-card" variants={flipUp}>
+            <motion.div key={i} className="why-card" variants={reveal}>
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
               <p>{reason.desc}</p>
@@ -823,7 +776,7 @@ function TestimonialsSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">Testimonials</div>
           <h2 className="section-title">What People Are Saying</h2>
@@ -833,10 +786,10 @@ function TestimonialsSection() {
           className="testimonials-grid"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerSlow}
+          variants={staggerMed}
         >
           {testimonials.map((t, i) => (
-            <motion.article key={i} className="testimonial-card" variants={fadeUp}>
+            <motion.article key={i} className="testimonial-card" variants={reveal}>
               <div className="testimonial-stars" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, j) => (
                   <Star key={j} className="star" size={16} fill="#C4963A" aria-hidden="true" />
@@ -900,7 +853,7 @@ function FAQSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={reveal}
         >
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
@@ -913,7 +866,7 @@ function FAQSection() {
           className="faq-list"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerSlow}
+          variants={staggerMed}
         >
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i
@@ -924,7 +877,7 @@ function FAQSection() {
               <motion.div
                 key={i}
                 className={`faq-item ${isOpen ? 'open' : ''}`}
-                variants={slideLeft}
+                variants={reveal}
               >
                 <button
                   id={headingId}
@@ -946,7 +899,7 @@ function FAQSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.35, ease }}
                     >
                       <p>{faq.a}</p>
                     </motion.div>
@@ -1111,7 +1064,7 @@ function CTASection() {
           className="cta-container"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={scaleIn}
+          variants={revealSoft}
         >
           <h2>Ready to find your perfect fit?</h2>
           <p>
