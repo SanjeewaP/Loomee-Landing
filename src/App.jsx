@@ -53,6 +53,21 @@ const popIn = {
   }
 }
 
+const flipUp = {
+  hidden: { opacity: 0, y: 48, rotateX: 14 },
+  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+}
+
+const staggerSlow = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.15 } }
+}
+
+const clipReveal = {
+  hidden: { opacity: 0.5, clipPath: 'inset(0 0 100% 0 round 24px)' },
+  visible: { opacity: 1, clipPath: 'inset(0 0 0% 0 round 24px)', transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
+}
+
 /* ====================================
    ROUTING — lightweight SPA router (no extra dependency)
    ==================================== */
