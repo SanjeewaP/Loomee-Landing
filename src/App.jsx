@@ -847,10 +847,10 @@ function TestimonialsSection() {
           className="testimonials-grid"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
+          variants={staggerSlow}
         >
           {testimonials.map((t, i) => (
-            <motion.article key={i} className="testimonial-card" variants={popIn}>
+            <motion.article key={i} className="testimonial-card" variants={fadeUp}>
               <div className="testimonial-stars" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, j) => (
                   <Star key={j} className="star" size={16} fill="#C4963A" aria-hidden="true" />
@@ -927,7 +927,7 @@ function FAQSection() {
           className="faq-list"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerContainer}
+          variants={staggerSlow}
         >
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i
@@ -938,7 +938,7 @@ function FAQSection() {
               <motion.div
                 key={i}
                 className={`faq-item ${isOpen ? 'open' : ''}`}
-                variants={popIn}
+                variants={slideLeft}
               >
                 <button
                   id={headingId}
@@ -1100,7 +1100,7 @@ function CTASection() {
           className="cta-container"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={popIn}
+          variants={scaleIn}
         >
           <h2>Ready to find your perfect fit?</h2>
           <p>
