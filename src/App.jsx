@@ -677,7 +677,7 @@ function DemoSection() {
             </a>
           </motion.div>
 
-          <motion.div className="demo-visual" variants={slideRight} aria-hidden="true">
+          <motion.div className="demo-visual" variants={clipReveal} aria-hidden="true">
             <PhoneMockup />
           </motion.div>
         </motion.div>
@@ -787,9 +787,10 @@ function WhySection() {
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
           variants={staggerContainer}
+          style={{ perspective: 1000 }}
         >
           {reasons.map((reason, i) => (
-            <motion.div key={i} className="why-card" variants={popIn}>
+            <motion.div key={i} className="why-card" variants={flipUp}>
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
               <p>{reason.desc}</p>
