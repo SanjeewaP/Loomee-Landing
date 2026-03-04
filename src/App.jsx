@@ -25,7 +25,7 @@ const fadeIn = {
 
 const staggerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
 }
 
 const scaleIn = {
@@ -41,6 +41,16 @@ const slideLeft = {
 const slideRight = {
   hidden: { opacity: 0, x: 40 },
   visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+}
+
+const popIn = {
+  hidden: { opacity: 0, scale: 0.88, y: 18 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 22 }
+  }
 }
 
 /* ====================================
@@ -463,7 +473,7 @@ function FeaturesSection() {
           variants={staggerContainer}
         >
           {features.map((feature, i) => (
-            <motion.div key={i} className="feature-card" variants={fadeUp}>
+            <motion.div key={i} className="feature-card" variants={popIn}>
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.desc}</p>
@@ -526,7 +536,7 @@ function HowItWorks() {
           variants={staggerContainer}
         >
           {steps.map((step, i) => (
-            <motion.li key={i} className="how-step" variants={fadeUp}>
+            <motion.li key={i} className="how-step" variants={popIn}>
               <div className="how-step-number" aria-hidden="true">{step.num}</div>
               <div className="how-step-icon" aria-hidden="true">{step.icon}</div>
               <h3>{step.title}</h3>
@@ -647,7 +657,7 @@ function TechSection() {
           variants={staggerContainer}
         >
           {techs.map((tech, i) => (
-            <motion.div key={i} className="tech-card" variants={fadeUp}>
+            <motion.div key={i} className="tech-card" variants={popIn}>
               <div className="tech-card-icon" aria-hidden="true">{tech.icon}</div>
               <h4>{tech.name}</h4>
               <p>{tech.desc}</p>
@@ -708,7 +718,7 @@ function WhySection() {
           variants={staggerContainer}
         >
           {reasons.map((reason, i) => (
-            <motion.div key={i} className="why-card" variants={fadeUp}>
+            <motion.div key={i} className="why-card" variants={popIn}>
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
               <p>{reason.desc}</p>
@@ -768,7 +778,7 @@ function TestimonialsSection() {
           variants={staggerContainer}
         >
           {testimonials.map((t, i) => (
-            <motion.article key={i} className="testimonial-card" variants={fadeUp}>
+            <motion.article key={i} className="testimonial-card" variants={popIn}>
               <div className="testimonial-stars" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, j) => (
                   <Star key={j} className="star" size={16} fill="#C4963A" aria-hidden="true" />
@@ -856,7 +866,7 @@ function FAQSection() {
               <motion.div
                 key={i}
                 className={`faq-item ${isOpen ? 'open' : ''}`}
-                variants={fadeUp}
+                variants={popIn}
               >
                 <button
                   id={headingId}
