@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: loomee-waitlist-api
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm run waitlist:api
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: WAITLIST_APP_NAME
+        value: "Loomee"
+      - key: WAITLIST_SEND_AUTOREPLY
+        value: "true"
+      - key: WAITLIST_ALLOWED_ORIGINS
+        sync: false
+      - key: WAITLIST_FROM_EMAIL
+        sync: false
+      - key: WAITLIST_AUTOREPLY_FROM_EMAIL
+        sync: false
+      - key: WAITLIST_NOTIFY_TO
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false

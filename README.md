@@ -12,6 +12,7 @@ A modern, animated landing page for **Loomée**, an AI-powered virtual fitting r
 | **Icons** | Lucide React |
 | **Styling** | Vanilla CSS (CSS variables, responsive) |
 | **Typography** | Syne + Plus Jakarta Sans (Google Fonts) |
+| **Waitlist Email** | Node.js API + Resend |
 | **Deployment** | GitHub Pages with custom domain |
 
 ## Getting Started
@@ -28,6 +29,9 @@ npm run build
 
 # Preview production build
 npm run preview
+
+# Run waitlist email API locally (expects env vars)
+npm run waitlist:api
 ```
 
 ## Project Structure
@@ -41,6 +45,9 @@ npm run preview
 │   ├── App.css             # Component styles
 │   ├── index.css           # Global styles & CSS variables
 │   └── main.jsx            # Entry point
+├── server/
+│   └── waitlist-api.mjs    # POST /api/waitlist -> sends email via Resend
+├── .env.example            # Frontend + waitlist API environment variables
 ├── index.html              # HTML template
 ├── vite.config.js          # Vite configuration
 ├── eslint.config.js        # ESLint configuration
@@ -71,6 +78,50 @@ git add docs/ -f
 git commit -m "Deploy website"
 git push
 ```
+
+### Waitlist Setup (Functional Email Submissions)
+
+The form in `src/App.jsx` already posts to `VITE_WAITLIST_ENDPOINT`.  
+To make it send real emails:
+
+1. Create a Resend account and verify your sending domain.
+2. Deploy `server/waitlist-api.mjs` as a Node service (Render recommended).
+3. Set server env vars (see `.env.example`):
+   - `RESEND_API_KEY`
+   - `WAITLIST_FROM_EMAIL`
+   - `WAITLIST_AUTOREPLY_FROM_EMAIL` (optional)
+   - `WAITLIST_NOTIFY_TO`
+   - `WAITLIST_ALLOWED_ORIGINS`
+   - `WAITLIST_SEND_AUTOREPLY`
+4. Expose the API URL as your frontend endpoint:
+   - `VITE_WAITLIST_ENDPOINT=https://your-api-domain.com/api/waitlist`
+5. In GitHub repo settings, add an Actions variable named `VITE_WAITLIST_ENDPOINT` so the Pages build includes it.
+6. Optional: use `render.yaml` in this repo for one-click Render Blueprint deploy.
+
+Local test flow:
+
+1. Start the API service with env vars set:
+   ```bash
+   RESEND_API_KEY=... \
+   WAITLIST_FROM_EMAIL="Loomee Waitlist <waitlist@yourdomain.com>" \
+   WAITLIST_NOTIFY_TO="founder@yourdomain.com" \
+   WAITLIST_ALLOWED_ORIGINS="http://localhost:5173" \
+   npm run waitlist:api
+   ```
+2. In another terminal:
+   ```bash
+   VITE_WAITLIST_ENDPOINT="http://localhost:8787/api/waitlist" npm run dev
+   ```
+
+Quick health check:
+
+```bash
+curl http://localhost:8787/health
+```
+
+Detailed backend instructions:
+
+- `server/README.md`
 
 ## Color Palette
 

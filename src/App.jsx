@@ -989,23 +989,15 @@ function WaitlistForm() {
     setStatus('loading')
     const endpoint = import.meta.env.VITE_WAITLIST_ENDPOINT
 
-    if (endpoint) {
-      try {
-        const res = await fetch(endpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name: name.trim(), email: email.trim() }),
-        })
-        if (!res.ok) throw new Error('Server error')
-        setStatus('success')
-        trackEvent('waitlist_submit_success', { source: 'endpoint' })
-      } catch {
+    if (!endpoint) {
+      // Local fallback in development only, to avoid silent production failures.
+      if (!import.meta.env.DEV) {
         setStatus('error')
-        setErrorMsg('Something went wrong. Please try again.')
-        trackEvent('waitlist_submit_error', { source: 'endpoint' })
+        setErrorMsg('Waitlist is temporarily unavailable. Please try again shortly.')
+        trackEvent('waitlist_submit_error', { source: 'missing_endpoint' })
+        return
       }
-    } else {
-      // Fallback: save to localStorage when no endpoint is configured
+
       try {
         const existing = JSON.parse(localStorage.getItem('loomee_waitlist') || '[]')
         existing.push({ name: name.trim(), email: email.trim(), date: new Date().toISOString() })
@@ -1017,6 +1009,39 @@ function WaitlistForm() {
         setErrorMsg('Unable to save. Please try again.')
         trackEvent('waitlist_submit_error', { source: 'localStorage' })
       }
+      return
+    }
+
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          source: 'loomee-website',
+          page: typeof window !== 'undefined' ? window.location.href : '',
+          submittedAt: new Date().toISOString(),
+        }),
+      })
+
+      let payload = null
+      try {
+        payload = await res.json()
+      } catch {
+        payload = null
+      }
+
+      if (!res.ok || payload?.ok === false) {
+        throw new Error(payload?.error || 'Server error')
+      }
+
+      setStatus('success')
+      trackEvent('waitlist_submit_success', { source: 'endpoint' })
+    } catch {
+      setStatus('error')
+      setErrorMsg('Something went wrong. Please try again.')
+      trackEvent('waitlist_submit_error', { source: 'endpoint' })
     }
   }
 
