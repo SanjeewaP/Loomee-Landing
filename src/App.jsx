@@ -429,45 +429,15 @@ function PhoneMockup() {
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              <circle cx="37" cy="15" r="15" fill="#B5673D" />
-              <rect x="23" y="30" width="28" height="72" rx="4" fill="#B5673D" />
-              <rect
-                x="47"
-                y="31.67"
-                width="15.4301"
-                height="61.2903"
-                rx="7.71504"
-                transform="rotate(-9.96477 47 31.67)"
-                fill="#B5673D"
-              />
-              <rect
-                x="12.2998"
-                y="29"
-                width="15.4301"
-                height="61.2903"
-                rx="7.71504"
-                transform="rotate(11.5768 12.2998 29)"
-                fill="#B5673D"
-              />
-              <rect
-                x="22.9957"
-                y="91"
-                width="15.4301"
-                height="70.9876"
-                rx="7.71504"
-                transform="rotate(3.22672 22.9957 91)"
-                fill="#B5673D"
-              />
-              <rect
-                x="35"
-                y="91.8191"
-                width="15.4301"
-                height="70.9876"
-                rx="7.71504"
-                transform="rotate(-6.77038 35 91.8191)"
-                fill="#B5673D"
-              />
-              <rect x="11" y="30" width="52" height="14" rx="7" fill="#B5673D" />
+              <svg width="73" height="163" viewBox="0 0 73 163" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="37" cy="15" r="15" fill="#E0956C"/>
+                <rect x="23" y="30" width="28" height="72" rx="4" fill="#E0956C"/>
+                <rect x="47" y="31.67" width="15.4301" height="61.2903" rx="7.71504" transform="rotate(-9.96477 47 31.67)" fill="#E0956C"/>
+                <rect x="12.2998" y="29" width="15.4301" height="61.2903" rx="7.71504" transform="rotate(11.5768 12.2998 29)" fill="#E0956C"/>
+                <rect x="22.9957" y="91" width="15.4301" height="70.9876" rx="7.71504" transform="rotate(3.22672 22.9957 91)" fill="#E0956C"/>
+                <rect x="35" y="91.8191" width="15.4301" height="70.9876" rx="7.71504" transform="rotate(-6.77038 35 91.8191)" fill="#E0956C"/>
+                <rect x="11" y="30" width="52" height="14" rx="7" fill="#E0956C"/>
+              </svg>
             </svg>
             <div className="phone-scan-line" />
             <div className="phone-ai-badge">
