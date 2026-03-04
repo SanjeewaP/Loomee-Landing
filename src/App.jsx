@@ -13,59 +13,60 @@ import './App.css'
 /* ====================================
    ANIMATION VARIANTS
    ==================================== */
+const scrollEase = [0.22, 1, 0.36, 1]
+
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { opacity: 0, y: 28 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: scrollEase } }
 }
 
 const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.6 } }
+  hidden: { y: 22, clipPath: 'inset(0 0 100% 0 round 28px)' },
+  visible: { y: 0, clipPath: 'inset(0 0 0% 0 round 28px)', transition: { duration: 0.85, ease: scrollEase } }
 }
 
 const staggerContainer = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } }
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.08 } }
 }
 
 const scaleIn = {
-  hidden: { opacity: 0, scale: 0.92 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: scrollEase } }
 }
 
 const slideLeft = {
-  hidden: { opacity: 0, x: -40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { opacity: 0, x: -28 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: scrollEase } }
 }
 
 const slideRight = {
-  hidden: { opacity: 0, x: 40 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { opacity: 0, x: 28 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.65, ease: scrollEase } }
 }
 
 const popIn = {
-  hidden: { opacity: 0, scale: 0.88, y: 18 },
+  hidden: { opacity: 0, y: 22 },
   visible: {
     opacity: 1,
-    scale: 1,
     y: 0,
-    transition: { type: 'spring', stiffness: 300, damping: 22 }
+    transition: { duration: 0.62, ease: scrollEase }
   }
 }
 
 const flipUp = {
-  hidden: { opacity: 0, y: 48, rotateX: 14 },
-  visible: { opacity: 1, y: 0, rotateX: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { opacity: 0, y: 34 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.72, ease: scrollEase } }
 }
 
 const staggerSlow = {
   hidden: {},
-  visible: { transition: { staggerChildren: 0.14, delayChildren: 0.15 } }
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.12 } }
 }
 
 const clipReveal = {
-  hidden: { opacity: 0.5, clipPath: 'inset(0 0 100% 0 round 24px)' },
-  visible: { opacity: 1, clipPath: 'inset(0 0 0% 0 round 24px)', transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] } }
+  hidden: { x: 24, clipPath: 'inset(0 100% 0 0 round 24px)' },
+  visible: { x: 0, clipPath: 'inset(0 0 0 0 round 24px)', transition: { duration: 0.9, ease: scrollEase } }
 }
 
 /* ====================================
@@ -366,10 +367,10 @@ function HeroSection() {
         initial="hidden"
         animate="visible"
         variants={{
-          hidden: { opacity: 0, scale: 0.88, y: 18 },
+          hidden: { opacity: 0, x: 26, y: 22 },
           visible: {
-            opacity: 1, scale: 1, y: 0,
-            transition: { type: 'spring', stiffness: 300, damping: 22, delay: 0.5 }
+            opacity: 1, x: 0, y: 0,
+            transition: { duration: 0.85, ease: scrollEase, delay: 0.45 }
           }
         }}
         aria-hidden="true"
