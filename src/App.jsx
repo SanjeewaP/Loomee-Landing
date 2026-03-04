@@ -296,10 +296,15 @@ function CountUp({ value }) {
    HERO SECTION
    ==================================== */
 function HeroSection() {
+  const { scrollY } = useScroll()
+  const bgY = useTransform(scrollY, [0, 600], [0, 140])
+  const gridY = useTransform(scrollY, [0, 600], [0, 80])
+  const mockupY = useTransform(scrollY, [0, 600], [0, -36])
+
   return (
     <section className="hero" id="hero">
-      <div className="hero-bg-gradient" aria-hidden="true" />
-      <div className="hero-grid-lines" aria-hidden="true" />
+      <motion.div className="hero-bg-gradient" style={{ y: bgY }} aria-hidden="true" />
+      <motion.div className="hero-grid-lines" style={{ y: gridY }} aria-hidden="true" />
 
       <motion.div
         className="hero-content"
@@ -339,17 +344,17 @@ function HeroSection() {
 
         <motion.div variants={popIn} className="hero-stats" aria-label="Key statistics">
           <div className="hero-stat">
-            <div className="stat-value">95%</div>
+            <div className="stat-value"><CountUp value="95%" /></div>
             <div className="stat-label">AI Confidence</div>
           </div>
           <div className="hero-stat-divider" aria-hidden="true" />
           <div className="hero-stat">
-            <div className="stat-value">{"<"}5s</div>
+            <div className="stat-value"><CountUp value="<5s" /></div>
             <div className="stat-label">Analysis Time</div>
           </div>
           <div className="hero-stat-divider" aria-hidden="true" />
           <div className="hero-stat">
-            <div className="stat-value">40%</div>
+            <div className="stat-value"><CountUp value="40%" /></div>
             <div className="stat-label">Less Returns</div>
           </div>
         </motion.div>
@@ -357,6 +362,7 @@ function HeroSection() {
 
       <motion.div
         className="hero-mockup-area"
+        style={{ y: mockupY }}
         initial="hidden"
         animate="visible"
         variants={{
