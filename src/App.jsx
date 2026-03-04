@@ -420,39 +420,54 @@ function PhoneMockup() {
             <p>Virtual Try-On</p>
           </div>
           <div className="phone-outfit-preview">
-            {/* Pictogram-style human figure using overlapping rounded rects.
-                 4 px gaps between arms and torso (background shows through)
-                 to recreate the classic accessibility icon look. */}
             <svg
               className="phone-outfit-silhouette"
-              viewBox="0 0 100 260"
+              width="73"
+              height="163"
+              viewBox="0 0 73 163"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
             >
-              {/* Head */}
-              <circle cx="50" cy="22" r="19" fill="rgba(181,103,61,0.30)" />
-
-              {/* Neck — bridges head to shoulder bar */}
-              <rect x="43" y="38" width="14" height="12" rx="5" fill="rgba(181,103,61,0.30)" />
-
-              {/* Shoulder cap — wide bar at top that joins both arms */}
-              <rect x="12" y="44" width="76" height="20" rx="10" fill="rgba(181,103,61,0.30)" />
-
-              {/* Left arm  (right edge x=30, torso left edge x=35 → 5 px gap) */}
-              <rect x="12" y="44" width="18" height="108" rx="9" fill="rgba(181,103,61,0.30)" />
-
-              {/* Right arm (left edge x=70, torso right edge x=65 → 5 px gap) */}
-              <rect x="70" y="44" width="18" height="108" rx="9" fill="rgba(181,103,61,0.30)" />
-
-              {/* Torso (x=35 → x=65, gap of 5 px on each side from arms) */}
-              <rect x="35" y="44" width="30" height="168" rx="8" fill="rgba(181,103,61,0.30)" />
-
-              {/* Left leg  (x=35 → x=49, 6 px gap from right leg) */}
-              <rect x="35" y="190" width="14" height="68" rx="7" fill="rgba(181,103,61,0.30)" />
-
-              {/* Right leg (x=51 → x=65) */}
-              <rect x="51" y="190" width="14" height="68" rx="7" fill="rgba(181,103,61,0.30)" />
+              <circle cx="37" cy="15" r="15" fill="#B5673D" />
+              <rect x="23" y="30" width="28" height="72" rx="4" fill="#B5673D" />
+              <rect
+                x="47"
+                y="31.67"
+                width="15.4301"
+                height="61.2903"
+                rx="7.71504"
+                transform="rotate(-9.96477 47 31.67)"
+                fill="#B5673D"
+              />
+              <rect
+                x="12.2998"
+                y="29"
+                width="15.4301"
+                height="61.2903"
+                rx="7.71504"
+                transform="rotate(11.5768 12.2998 29)"
+                fill="#B5673D"
+              />
+              <rect
+                x="22.9957"
+                y="91"
+                width="15.4301"
+                height="70.9876"
+                rx="7.71504"
+                transform="rotate(3.22672 22.9957 91)"
+                fill="#B5673D"
+              />
+              <rect
+                x="35"
+                y="91.8191"
+                width="15.4301"
+                height="70.9876"
+                rx="7.71504"
+                transform="rotate(-6.77038 35 91.8191)"
+                fill="#B5673D"
+              />
+              <rect x="11" y="30" width="52" height="14" rx="7" fill="#B5673D" />
             </svg>
             <div className="phone-scan-line" />
             <div className="phone-ai-badge">

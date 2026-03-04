@@ -1,0 +1,49 @@
+<svg viewBox="0 0 500 340" xmlns="http://www.w3.org/2000/svg" fill="#1C2B39">
+
+  <!-- ═══ LEFT "N" ═══ -->
+  <!-- Left post of N -->
+  <rect x="30"  y="90"  width="36" height="185"/>
+  <!-- Top serif – left post -->
+  <rect x="14"  y="76"  width="68" height="22"/>
+  <!-- Bottom serif – left post -->
+  <rect x="14"  y="271" width="68" height="22"/>
+
+  <!-- N diagonal: top-left corner → bottom-right corner -->
+  <polygon points="66,90  106,90  106,110  66,110"/>
+  <polygon points="66,90  106,90  166,275  126,275"/>
+
+  <!-- Right post of N -->
+  <rect x="130" y="90"  width="36" height="185"/>
+  <!-- Top serif – right post of N -->
+  <rect x="114" y="76"  width="68" height="22"/>
+  <!-- Bottom serif – right post of N -->
+  <rect x="114" y="271" width="68" height="22"/>
+
+  <!-- ═══ CENTER TALL "L" ═══ -->
+  <!-- Tall vertical -->
+  <rect x="232" y="18"  width="36" height="280"/>
+  <!-- Top cap -->
+  <rect x="216" y="18"  width="68" height="22"/>
+  <!-- L base – horizontal foot extending right -->
+  <rect x="216" y="276" width="68" height="22"/>
+
+  <!-- ═══ RIGHT MIRRORED "N" (reads as Л / reversed N) ═══ -->
+  <!-- Left post of mirrored N -->
+  <rect x="334" y="90"  width="36" height="185"/>
+  <!-- Top serif – left post of mirrored N -->
+  <rect x="318" y="76"  width="68" height="22"/>
+  <!-- Bottom serif – left post of mirrored N -->
+  <rect x="318" y="271" width="68" height="22"/>
+
+  <!-- Mirrored diagonal: top-right → bottom-left -->
+  <polygon points="370,90  334,90  334,110  370,110"/>
+  <polygon points="394,90  434,90  374,275  334,275"/>
+
+  <!-- Right post of mirrored N -->
+  <rect x="398" y="90"  width="36" height="185"/>
+  <!-- Top serif – right post -->
+  <rect x="382" y="76"  width="68" height="22"/>
+  <!-- Bottom serif – right post -->
+  <rect x="382" y="271" width="68" height="22"/>
+
+</svg>
