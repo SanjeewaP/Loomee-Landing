@@ -215,21 +215,34 @@ const server = createServer(async (req, res) => {
         await sendWithResend({
           from: WAITLIST_AUTOREPLY_FROM_EMAIL,
           to: [email],
-          subject: `Welcome to the ${APP_NAME} waitlist`,
+          subject: `You're on the ${APP_NAME} waitlist`,
           html: `
             <p>Hi ${escapedName},</p>
-            <p>Thanks for joining the ${APP_NAME} waitlist. You're officially on the list.</p>
-            <p>We're putting the finishing touches on the app, and we'll email you as soon as early access opens.</p>
-            <p>Appreciate your support,</p>
+            <p>Welcome to the ${APP_NAME} waitlist — your spot is confirmed.</p>
+            <p>We're finalising the app and preparing early access. You'll receive an email the moment it opens, with clear steps to get started.</p>
+            <p>Here's what to expect:</p>
+            <ul>
+              <li>Early access link</li>
+              <li>Setup instructions</li>
+              <li>Tips to get the best experience</li>
+            </ul>
+            <p>Thank you for backing ${APP_NAME} from the start.</p>
             <p>The ${APP_NAME} Team</p>
           `,
           text: [
             `Hi ${name},`,
             '',
-            `Thanks for joining the ${APP_NAME} waitlist. You're officially on the list.`,
-            `We're putting the finishing touches on the app, and we'll email you as soon as early access opens.`,
+            `Welcome to the ${APP_NAME} waitlist — your spot is confirmed.`,
             '',
-            'Appreciate your support,',
+            `We're finalising the app and preparing early access. You'll receive an email the moment it opens, with clear steps to get started.`,
+            '',
+            "Here's what to expect:",
+            '  • Early access link',
+            '  • Setup instructions',
+            '  • Tips to get the best experience',
+            '',
+            `Thank you for backing ${APP_NAME} from the start.`,
+            '',
             `The ${APP_NAME} Team`,
           ].join('\n'),
         })
