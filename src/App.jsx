@@ -256,24 +256,24 @@ function HeroSection() {
         animate="visible"
         variants={staggerContainer}
       >
-        <motion.div variants={fadeUp} className="hero-badge">
+        <motion.div variants={popIn} className="hero-badge">
           <span className="badge-dot" aria-hidden="true" />
           Powered by Gemini and Replicate
         </motion.div>
 
-        <motion.h1 variants={fadeUp}>
+        <motion.h1 variants={popIn}>
           Your style,
           <br />
           <span className="highlight">perfectly fitted.</span>
         </motion.h1>
 
-        <motion.p variants={fadeUp} className="hero-description">
+        <motion.p variants={popIn} className="hero-description">
           Loomeé is an AI-powered virtual fitting room that lets you try on clothes
           digitally — with real-time body analysis, personalized size recommendations,
           and intelligent style insights.
         </motion.p>
 
-        <motion.div variants={fadeUp} className="hero-buttons">
+        <motion.div variants={popIn} className="hero-buttons">
           <a
             href="#cta"
             className="btn-primary btn-large"
@@ -286,7 +286,7 @@ function HeroSection() {
           </a>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="hero-stats" aria-label="Key statistics">
+        <motion.div variants={popIn} className="hero-stats" aria-label="Key statistics">
           <div className="hero-stat">
             <div className="stat-value">95%</div>
             <div className="stat-label">AI Confidence</div>
@@ -306,9 +306,15 @@ function HeroSection() {
 
       <motion.div
         className="hero-mockup-area"
-        initial={{ opacity: 0, y: 60 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0, scale: 0.88, y: 18 },
+          visible: {
+            opacity: 1, scale: 1, y: 0,
+            transition: { type: 'spring', stiffness: 300, damping: 22, delay: 0.5 }
+          }
+        }}
         aria-hidden="true"
       >
         <div style={{ position: 'relative' }}>
@@ -456,7 +462,7 @@ function FeaturesSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">Features</div>
           <h2 className="section-title">Empower Your Wardrobe with AI</h2>
@@ -520,7 +526,7 @@ function HowItWorks() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">How It Works</div>
           <h2 className="section-title">Three Steps to Your Perfect Fit</h2>
@@ -640,7 +646,7 @@ function TechSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">Technology</div>
           <h2 className="section-title">Built with Modern Tech</h2>
@@ -702,7 +708,7 @@ function WhySection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">Why Loomeé</div>
           <h2 className="section-title">Why Choose Loomeé?</h2>
@@ -765,7 +771,7 @@ function TestimonialsSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">Testimonials</div>
           <h2 className="section-title">What People Are Saying</h2>
@@ -842,7 +848,7 @@ function FAQSection() {
           className="section-header"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={fadeUp}
+          variants={popIn}
         >
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
@@ -1028,7 +1034,7 @@ function CTASection() {
           className="cta-container"
           initial="hidden"
           animate={isInView ? 'visible' : 'hidden'}
-          variants={scaleIn}
+          variants={popIn}
         >
           <h2>Ready to find your perfect fit?</h2>
           <p>
