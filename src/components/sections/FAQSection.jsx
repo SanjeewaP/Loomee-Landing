@@ -19,7 +19,7 @@ export default function FAQSection() {
     },
     {
       q: 'How accurate are the size recommendations?',
-      a: 'Our AI delivers recommendations with confidence scores ranging from 85% to 95%. The system compares your unique measurements against specific garment sizing data — not generic size charts — for the most accurate fit prediction possible.',
+      a: 'Our AI delivers recommendations with confidence scores ranging from 85% to 95%. The system compares your unique measurements against specific garment sizing data not generic size charts for the most accurate fit prediction possible.',
     },
     {
       q: 'What is the virtual try-on feature?',
@@ -27,7 +27,7 @@ export default function FAQSection() {
     },
     {
       q: 'Does Loomeé work with any clothing brand?',
-      a: "Yes! You can browse our built-in catalog or upload any clothing image. Our AI analyzes the garment's visual properties — color, style, fabric type — and provides recommendations regardless of the brand.",
+      a: "Yes! You can explore our built-in catalog or upload any clothing image. Our AI examines key visual details like color, style, and fabric type to generate recommendations, no matter the brand.",
     },
     {
       q: 'What platforms is Loomeé available on?',
