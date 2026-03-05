@@ -10,7 +10,7 @@ import {
   Cloud,
   Rocket,
   Lock
-} from "lucide-react"'
+} from "lucide-react"
 
 export default function TechSection() {
   const ref = useRef(null)
