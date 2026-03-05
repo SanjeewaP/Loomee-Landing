@@ -31,7 +31,7 @@ export default function DemoSection() {
             <h2>See Loomeé in Action</h2>
             <p>
               Upload a photo, pick a garment, and watch our AI deliver instant fit
-              analysis, smart size suggestions, and a virtual try-on preview — all
+              analysis, smart size suggestions, and a virtual try-on preview all
               in under five seconds.
             </p>
 
