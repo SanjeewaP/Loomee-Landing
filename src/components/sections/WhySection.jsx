@@ -17,7 +17,7 @@ export default function WhySection() {
     },
     {
       title: 'Real AI, Real Results',
-      desc: 'Powered by Google Gemini 2.5 Flash with 85–95% confidence scores — not generic sizing charts or rough estimates.',
+      desc: 'Powered by Google Gemini 2.5 Flash with 85–95% confidence scores not generic sizing charts or rough estimates.',
     },
     {
       title: 'Built for Everyone',
