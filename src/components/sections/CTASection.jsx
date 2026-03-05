@@ -19,7 +19,7 @@ export default function CTASection() {
           <h2>Ready to find your perfect fit?</h2>
           <p>
             Join Loomeé and shop online with confidence. No more wrong sizes,
-            no more returns — just clothes that fit you.
+            no more returns, just clothes that fit you.
           </p>
           <WaitlistForm />
           <a href="#features" className="btn-glass cta-explore-btn">
