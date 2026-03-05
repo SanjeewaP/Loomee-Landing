@@ -1,21 +1,31 @@
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { reveal, stagger } from '../../utils/animations'
+import {
+  BrainCircuit,
+  Palette,
+  Zap,
+  Leaf,
+  Smartphone,
+  Cloud,
+  Rocket,
+  Lock
+} from "lucide-react"'
 
 export default function TechSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
   const techs = [
-    { icon: '🧠', name: 'Google Gemini', desc: 'AI vision & analysis' },
-    { icon: '🎨', name: 'Replicate', desc: 'Virtual try-on generation' },
-    { icon: '⚡', name: 'Node.js', desc: 'Backend API server' },
-    { icon: '🍃', name: 'MongoDB Atlas', desc: 'Cloud database' },
-    { icon: '📱', name: 'Flutter', desc: 'Cross-platform mobile' },
-    { icon: '☁️', name: 'Cloudinary', desc: 'Image cloud storage' },
-    { icon: '🚀', name: 'Render', desc: 'Production hosting' },
-    { icon: '🔐', name: 'JWT Auth', desc: 'Secure authentication' },
-  ]
+  { icon: <BrainCircuit size={22} />, name: 'Google Gemini', desc: 'AI vision & analysis' },
+  { icon: <Palette size={22} />, name: 'Replicate', desc: 'Virtual try-on generation' },
+  { icon: <Zap size={22} />, name: 'Node.js', desc: 'Backend API server' },
+  { icon: <Leaf size={22} />, name: 'MongoDB Atlas', desc: 'Cloud database' },
+  { icon: <Smartphone size={22} />, name: 'Flutter', desc: 'Cross-platform mobile' },
+  { icon: <Cloud size={22} />, name: 'Cloudinary', desc: 'Image cloud storage' },
+  { icon: <Rocket size={22} />, name: 'Render', desc: 'Production hosting' },
+  { icon: <Lock size={22} />, name: 'JWT Auth', desc: 'Secure authentication' },
+]
 
   return (
     <section className="tech-section" id="technology" ref={ref}>
