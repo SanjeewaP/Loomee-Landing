@@ -30,9 +30,7 @@ export default function DemoSection() {
             <div className="section-eyebrow">Live Demo</div>
             <h2>See Loomeé in Action</h2>
             <p>
-              Upload a photo, pick a garment, and watch our AI deliver instant fit
-              analysis, smart size suggestions, and a virtual try-on preview all
-              in under five seconds.
+             Upload a photo, pick a garment, and watch our AI deliver instant fit analysis, smart size suggestions, and a virtual try-on preview, all in under five seconds.
             </p>
 
             <ul className="demo-features-list">
