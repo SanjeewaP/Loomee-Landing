@@ -16,7 +16,7 @@ export default function FeaturesSection() {
     {
       icon: <Ruler size={22} />,
       title: 'Smart Size Recommendations',
-      desc: 'Get precise size suggestions by comparing your unique body data against garment dimensions — including fit, stretch, and style.',
+      desc: 'Get precise size suggestions by comparing your unique body data against garment dimensions including fit, stretch, and style.',
     },
     {
       icon: <Palette size={22} />,
