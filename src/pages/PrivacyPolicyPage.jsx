@@ -10,8 +10,11 @@ export default function PrivacyPolicyPage() {
 
       <h2>2. Information We Collect</h2>
       <p><strong>Account Information:</strong> When you register, we collect your name, email address, and password (stored in encrypted form).</p>
-      <p><strong>Body Photos &amp; Measurements:</strong> To provide virtual try-on and size recommendations, we process photos you upload. These images are temporarily transmitted to Google Gemini AI for body analysis. We do not store your raw photos permanently — they are deleted from our servers within 24 hours of processing.</p>
+
+      <p><strong>Body Photos &amp; Measurements:</strong> To provide virtual try-on and size recommendations, we process photos you upload. These images are temporarily transmitted to Google Gemini AI for body analysis. We do not store raw photos permanently. All uploaded images are deleted from our servers within 24 hours of processing.</p>
+
       <p><strong>Usage Data:</strong> We collect anonymised data about how you interact with the app, including features used, session duration, and device type, to improve our service.</p>
+
       <p><strong>Communications:</strong> If you contact us by email, we retain those communications to respond to your enquiry.</p>
 
       <h2>3. How We Use Your Information</h2>
@@ -19,7 +22,9 @@ export default function PrivacyPolicyPage() {
 
       <h2>4. Third-Party Services</h2>
       <p><strong>Google Gemini AI:</strong> Body photos are processed via the Google Gemini API for real-time body analysis. Google&rsquo;s processing is governed by Google&rsquo;s Privacy Policy.</p>
+
       <p><strong>Render:</strong> Our backend infrastructure is hosted on Render. Data in transit is encrypted via TLS.</p>
+
       <p><strong>Analytics:</strong> We use anonymised analytics tools to understand aggregate usage patterns. No personally identifiable information is shared with analytics providers.</p>
 
       <h2>5. Data Retention</h2>
