@@ -12,8 +12,8 @@ export default function Footer() {
               Loomeé VTO
             </NavLink>
             <p>
-              AI-powered virtual fitting room that helps you shop online with
-              confidence. Built with Google Gemini, Flutter, and love.
+              An AI-powered virtual fitting room that helps you shop online with confidence.
+              Built with Google Gemini, Flutter, and love.
             </p>
           </div>
 
