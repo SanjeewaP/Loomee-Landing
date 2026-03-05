@@ -9,7 +9,7 @@ export default function TestimonialsSection() {
 
   const testimonials = [
     {
-      text: '"Loomeé completely changed how I shop online. I used to return half my orders — now I know exactly what size to pick before I buy."',
+      text: '"Loomeé completely changed how I shop online. I used to return half my orders now I know exactly what size to pick before I buy."',
       name: 'Sarah K.',
       role: 'Fashion Enthusiast',
       initials: 'SK',
