@@ -1,11 +1,7 @@
-import { useRef, useState } from 'react'
-import { motion, AnimatePresence, useInView } from 'framer-motion'
+import { useState } from 'react'
 import { Plus } from 'lucide-react'
-import { reveal, staggerMed, ease } from '../../utils/animations'
 
 export default function FAQSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
   const [openIndex, setOpenIndex] = useState(null)
 
   const faqs = [
@@ -36,37 +32,28 @@ export default function FAQSection() {
   ]
 
   return (
-    <section className="faq-section" id="faq" ref={ref}>
+    <section className="faq-section" id="faq">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={reveal}
-        >
+        <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle">
             Everything you need to know about Loomeé and how it works.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="faq-list"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerMed}
-        >
+        <div className="faq-list">
           {faqs.map((faq, i) => {
             const isOpen = openIndex === i
             const headingId = `faq-heading-${i}`
             const panelId = `faq-panel-${i}`
 
             return (
-              <motion.div
+              <div
                 key={i}
                 className={`faq-item ${isOpen ? 'open' : ''}`}
-                variants={reveal}
+                data-scroll-reveal
+                style={{ '--reveal-delay': `${i * 50}ms` }}
               >
                 <button
                   id={headingId}
@@ -78,26 +65,20 @@ export default function FAQSection() {
                   {faq.q}
                   <span className="faq-icon" aria-hidden="true"><Plus size={18} /></span>
                 </button>
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      id={panelId}
-                      className="faq-answer"
-                      role="region"
-                      aria-labelledby={headingId}
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: 'auto', opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.35, ease }}
-                    >
-                      <p>{faq.a}</p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                {isOpen && (
+                  <div
+                    id={panelId}
+                    className="faq-answer"
+                    role="region"
+                    aria-labelledby={headingId}
+                  >
+                    <p>{faq.a}</p>
+                  </div>
+                )}
+              </div>
             )
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
