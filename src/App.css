@@ -47,6 +47,11 @@
   60%       { box-shadow: 0 0 0 6px rgba(181, 103, 61, 0); }
 }
 
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 @keyframes cta-shimmer {
   0%   { transform: translateX(-100%) skewX(-15deg); }
   100% { transform: translateX(300%) skewX(-15deg); }
@@ -62,7 +67,8 @@
   .floating-card,
   .hero-badge .badge-dot,
   .cta-container::after,
-  .phone-scan-line {
+  .phone-scan-line,
+  .marquee-track {
     animation: none !important;
   }
 }
@@ -79,9 +85,8 @@
 
 .marquee-track {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px 48px;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
 }
 
 .marquee-track span {
@@ -94,6 +99,8 @@
   display: inline-flex;
   align-items: center;
   gap: 12px;
+  padding: 0 36px;
+  white-space: nowrap;
 }
 
 .marquee-track span .dot {

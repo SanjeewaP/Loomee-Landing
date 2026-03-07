@@ -6,10 +6,10 @@ export default function MarqueeStrip() {
   ]
 
   return (
-    <div className="marquee-strip" data-scroll-reveal>
-      <div className="marquee-track">
-        {items.map((item, i) => (
-          <span key={i}><span className="dot" />{item}</span>
+    <div className="marquee-strip" data-scroll-reveal aria-label="Feature highlights">
+      <div className="marquee-track" aria-hidden="true">
+        {[...items, ...items].map((item, i) => (
+          <span key={i}><span className="dot" aria-hidden="true" />{item}</span>
         ))}
       </div>
     </div>
