@@ -87,6 +87,7 @@ export default function Navbar() {
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
+          onClick={() => setMenuOpen(false)}
         >
           <button
             className="mobile-close-btn"
