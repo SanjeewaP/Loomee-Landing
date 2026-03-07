@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight, Menu, X } from 'lucide-react'
 import NavLink from '../ui/NavLink'
 import { trackEvent } from '../../utils/analytics'
@@ -18,7 +17,9 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+    }
   }, [menuOpen])
 
   // Escape key closes the mobile menu and returns focus to the trigger button
@@ -43,13 +44,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav
-        className={`navbar ${scrolled ? 'scrolled' : ''}`}
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        aria-label="Main navigation"
-      >
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main navigation" data-scroll-reveal>
         <div className="navbar-inner">
           <NavLink href="/" className="navbar-logo">
             <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
@@ -57,7 +52,7 @@ export default function Navbar() {
           </NavLink>
 
           <div className="navbar-links">
-            {links.map(link => (
+            {links.map((link) => (
               <a key={link.href} href={link.href}>{link.label}</a>
             ))}
           </div>
@@ -83,56 +78,44 @@ export default function Navbar() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            id={menuId}
-            className="mobile-menu-overlay"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+      {menuOpen && (
+        <div
+          id={menuId}
+          className="mobile-menu-overlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+        >
+          <button
+            className="mobile-close-btn"
+            onClick={() => setMenuOpen(false)}
+            aria-label="Close menu"
           >
-            <button
-              className="mobile-close-btn"
+            <X size={28} />
+          </button>
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
               onClick={() => setMenuOpen(false)}
-              aria-label="Close menu"
             >
-              <X size={28} />
-            </button>
-            {links.map((link, i) => (
-              <motion.a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMenuOpen(false)}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.08 + 0.15 }}
-              >
-                {link.label}
-              </motion.a>
-            ))}
-            <motion.a
-              href="#cta"
-              className="btn-primary btn-large"
-              onClick={() => {
-                setMenuOpen(false)
-                trackEvent('cta_click', { location: 'mobile_menu' })
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              Get Started <ArrowRight size={18} />
-            </motion.a>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="#cta"
+            className="btn-primary btn-large"
+            onClick={() => {
+              setMenuOpen(false)
+              trackEvent('cta_click', { location: 'mobile_menu' })
+            }}
+          >
+            Get Started <ArrowRight size={18} />
+          </a>
+        </div>
+      )}
     </>
   )
 }
