@@ -1,12 +1,6 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { Star } from 'lucide-react'
-import { reveal, staggerMed } from '../../utils/animations'
 
 export default function TestimonialsSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const testimonials = [
     {
       text: '"Loomeé completely changed how I shop online. I used to return half my orders. Now I know exactly what size to pick before I buy."',
@@ -21,7 +15,7 @@ export default function TestimonialsSection() {
       initials: 'MD',
     },
     {
-      text: "\"As someone who struggles with inconsistent sizing across brands, Loomeé's per-garment analysis is a game-changer. Love the confidence scores.\"",
+      text: '"As someone who struggles with inconsistent sizing across brands, Loomeé\'s per-garment analysis is a game-changer. Love the confidence scores."',
       name: 'Priya M.',
       role: 'Style Blogger',
       initials: 'PM',
@@ -29,26 +23,21 @@ export default function TestimonialsSection() {
   ]
 
   return (
-    <section className="testimonials-section" ref={ref}>
+    <section className="testimonials-section">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={reveal}
-        >
+        <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">Testimonials</div>
           <h2 className="section-title">What People Are Saying</h2>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="testimonials-grid"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={staggerMed}
-        >
+        <div className="testimonials-grid">
           {testimonials.map((t, i) => (
-            <motion.article key={i} className="testimonial-card" variants={reveal}>
+            <article
+              key={i}
+              className="testimonial-card"
+              data-scroll-reveal
+              style={{ '--reveal-delay': `${i * 70}ms` }}
+            >
               <div className="testimonial-stars" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, j) => (
                   <Star key={j} className="star" size={16} fill="#C4963A" aria-hidden="true" />
@@ -62,9 +51,9 @@ export default function TestimonialsSection() {
                   <p>{t.role}</p>
                 </div>
               </div>
-            </motion.article>
+            </article>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
