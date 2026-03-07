@@ -15,6 +15,27 @@
   background-size: 256px 256px;
 }
 
+/* ---- SHARED SCROLL REVEAL ---- */
+[data-scroll-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-scroll-reveal].is-visible {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ---- MARQUEE ---- */
 .marquee-strip {
   overflow: hidden;
