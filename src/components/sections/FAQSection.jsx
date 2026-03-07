@@ -51,7 +51,8 @@ export default function FAQSection() {
             return (
               <div
                 key={i}
-                className={`faq-item ${isOpen ? 'open' : ''}`}
+                className="faq-item"
+                data-open={isOpen || undefined}
                 data-scroll-reveal
                 style={{ '--reveal-delay': `${i * 50}ms` }}
               >

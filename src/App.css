@@ -52,10 +52,17 @@
   100% { transform: translateX(300%) skewX(-15deg); }
 }
 
+@keyframes scan-line {
+  0%, 100% { top: 12%; opacity: 0.8; }
+  48%       { opacity: 1; }
+  50%       { top: 82%; opacity: 0.8; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .floating-card,
   .hero-badge .badge-dot,
-  .cta-container::after {
+  .cta-container::after,
+  .phone-scan-line {
     animation: none !important;
   }
 }
@@ -493,8 +500,8 @@
   background: var(--gradient-primary);
   border-radius: 1px;
   box-shadow: 0 0 20px rgba(181, 103, 61, 0.5);
-  top: 50%;
-  opacity: 0.65;
+  top: 12%;
+  animation: scan-line 2.8s ease-in-out infinite;
 }
 
 .phone-ai-badge {
@@ -1206,7 +1213,7 @@
   box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
-.faq-item.open {
+.faq-item[data-open] {
   border-color: rgba(181, 103, 61, 0.15);
 }
 
@@ -1239,7 +1246,7 @@
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
-.faq-item.open .faq-icon {
+.faq-item[data-open] .faq-icon {
   transform: rotate(45deg);
   color: var(--terracotta-400);
 }
