@@ -1,6 +1,6 @@
 # Loomée — AI Virtual Fitting Room Website
 
-A modern, animated landing page for **Loomée**, an AI-powered virtual fitting room application.
+A modern landing page for **Loomée**, an AI-powered virtual fitting room application.
 
 ## Tech Stack
 
@@ -8,7 +8,7 @@ A modern, animated landing page for **Loomée**, an AI-powered virtual fitting r
 |-------|------------|
 | **Framework** | React 19 |
 | **Build Tool** | Vite 6+ |
-| **Animation** | Framer Motion 12 |
+| **Scroll Animation** | One shared fade-up reveal (IntersectionObserver + CSS) |
 | **Icons** | Lucide React |
 | **Styling** | Vanilla CSS (CSS variables, responsive) |
 | **Typography** | Syne + Plus Jakarta Sans (Google Fonts) |
@@ -56,15 +56,15 @@ npm run waitlist:api
 
 ## Sections
 
-1. **Hero** — Animated headline with phone mockup, floating cards, and stats
-2. **Marquee** — Scrolling feature keywords strip
+1. **Hero** — Clean headline with phone mockup and stats
+2. **Marquee** — Static feature keyword strip
 3. **Features** — 6-card grid showcasing core AI capabilities
 4. **How It Works** — 3-step process with numbered timeline
 5. **Demo Showcase** — Split layout with feature checklist and phone preview
 6. **Technology** — 8-card grid of the tech stack
 7. **Why Loomée** — 4 reasons with numbered cards
 8. **Testimonials** — 3 user review cards
-9. **FAQ** — Expandable accordion with smooth animations
+9. **FAQ** — Expandable accordion (no motion effects)
 10. **CTA** — Gradient call-to-action with download button
 11. **Footer** — 4-column footer with social links
 
