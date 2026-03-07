@@ -47,8 +47,10 @@
 }
 
 .marquee-track {
-  display: inline-flex;
-  animation: marquee-scroll 40s linear infinite;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px 48px;
 }
 
 .marquee-track span {
@@ -58,7 +60,6 @@
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--text-secondary);
-  margin-right: 48px;
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -70,11 +71,6 @@
   border-radius: 50%;
   background: var(--terracotta-500);
   flex-shrink: 0;
-}
-
-@keyframes marquee-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 /* ---- NAVBAR ---- */
@@ -312,12 +308,6 @@
   height: 8px;
   border-radius: 50%;
   background: var(--terracotta-500);
-  animation: pulse-dot 2s ease-in-out infinite;
-}
-
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
 }
 
 .hero h1 {
@@ -481,12 +471,8 @@
   background: var(--gradient-primary);
   border-radius: 1px;
   box-shadow: 0 0 20px rgba(181, 103, 61, 0.5);
-  animation: scan-move 3s ease-in-out infinite;
-}
-
-@keyframes scan-move {
-  0%, 100% { top: 15%; opacity: 0.4; }
-  50% { top: 80%; opacity: 1; }
+  top: 50%;
+  opacity: 0.65;
 }
 
 .phone-ai-badge {
@@ -1149,7 +1135,6 @@
   height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
-  animation: pulse-dot 2s ease-in-out infinite;
 }
 
 .btn-glass {
@@ -1666,12 +1651,6 @@
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   box-shadow: 0 16px 48px rgba(28, 43, 57, 0.14), 0 2px 8px rgba(28, 43, 57, 0.07), inset 0 1px 0 rgba(255, 255, 255, 1);
-  animation: banner-slide-up 0.4s var(--ease-out-expo);
-}
-
-@keyframes banner-slide-up {
-  from { transform: translateX(-50%) translateY(20px); opacity: 0; }
-  to   { transform: translateX(-50%) translateY(0);   opacity: 1; }
 }
 
 .cookie-banner-content {
