@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react'
-import { MotionConfig } from 'framer-motion'
 import NavigateContext from './context/NavigateContext'
 import useScrollReveal from './hooks/useScrollReveal'
 import './App.css'
@@ -84,15 +83,8 @@ export default function App() {
 
   return (
     <NavigateContext.Provider value={navigate}>
-      {/*
-        MotionConfig reducedMotion="user" automatically disables or minimises
-        all framer-motion animations when the OS prefers-reduced-motion setting
-        is enabled — no extra JS needed.
-      */}
-      <MotionConfig reducedMotion="user">
-        {renderPage()}
-        <CookieBanner />
-      </MotionConfig>
+      {renderPage()}
+      <CookieBanner />
     </NavigateContext.Provider>
   )
 }
