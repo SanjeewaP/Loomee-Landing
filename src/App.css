@@ -377,6 +377,14 @@
   align-items: center;
   justify-content: center;
   gap: 48px;
+  background: rgba(255, 255, 255, 0.44);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 20px;
+  padding: 20px 40px;
+  box-shadow: 0 6px 24px rgba(28, 43, 57, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
+  margin-top: 48px;
 }
 
 .hero-stat {
@@ -613,6 +621,15 @@
   text-transform: uppercase;
   color: var(--terracotta-400);
   margin-bottom: 16px;
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 16px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 100px;
+  box-shadow: 0 2px 10px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
 .section-title {
@@ -730,6 +747,31 @@
 .how-section {
   padding: var(--section-gap) 0;
   position: relative;
+  overflow: hidden;
+}
+
+.how-section::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.08), transparent 65%);
+  top: -200px;
+  right: -200px;
+  pointer-events: none;
+}
+
+.how-section::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 128, 106, 0.07), transparent 65%);
+  bottom: -150px;
+  left: -150px;
+  pointer-events: none;
 }
 
 .how-steps {
@@ -753,6 +795,20 @@
 .how-step {
   text-align: center;
   position: relative;
+  background: rgba(255, 255, 255, 0.44);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: 24px;
+  padding: 36px 28px 32px;
+  box-shadow: 0 8px 32px rgba(28, 43, 57, 0.09), 0 1px 4px rgba(28, 43, 57, 0.05), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.how-step:hover {
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 16px 48px rgba(28, 43, 57, 0.12), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
 }
 
 .how-step-number {
@@ -777,13 +833,16 @@
   width: 72px;
   height: 72px;
   border-radius: 20px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-subtle);
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--terracotta-400);
   margin: 0 auto 20px;
+  box-shadow: 0 4px 16px rgba(28, 43, 57, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
 }
 
 .how-step h3 {
@@ -910,12 +969,14 @@
   border-radius: 16px;
   text-align: center;
   box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .tech-card:hover {
   background: rgba(255, 255, 255, 0.68);
   border-color: rgba(181, 103, 61, 0.2);
   box-shadow: 0 14px 40px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
 }
 
 .tech-card-icon {
@@ -946,6 +1007,32 @@
 /* ---- WHY CHOOSE ---- */
 .why-section {
   padding: var(--section-gap) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.why-section::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.07), transparent 65%);
+  top: -100px;
+  left: -150px;
+  pointer-events: none;
+}
+
+.why-section::after {
+  content: '';
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 128, 106, 0.06), transparent 65%);
+  bottom: -100px;
+  right: -100px;
+  pointer-events: none;
 }
 
 .why-grid {
@@ -962,11 +1049,13 @@
   border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: 20px;
   box-shadow: 0 6px 28px rgba(28, 43, 57, 0.1), 0 1px 4px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transition: background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .why-card:hover {
   background: rgba(255, 255, 255, 0.68);
   box-shadow: 0 16px 48px rgba(28, 43, 57, 0.13), 0 2px 8px rgba(28, 43, 57, 0.06), inset 0 1px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
 }
 
 .why-card-number {
@@ -1193,6 +1282,32 @@
 /* ---- FAQ ---- */
 .faq-section {
   padding: var(--section-gap) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.faq-section::before {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.07), transparent 65%);
+  top: -100px;
+  right: -150px;
+  pointer-events: none;
+}
+
+.faq-section::after {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(196, 128, 106, 0.05), transparent 65%);
+  bottom: -80px;
+  left: -80px;
+  pointer-events: none;
 }
 
 .faq-list {
