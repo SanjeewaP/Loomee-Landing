@@ -1,12 +1,6 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { Upload, Shirt, Wand2 } from 'lucide-react'
-import { reveal, stagger } from '../../utils/animations'
 
 export default function HowItWorks() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const steps = [
     {
       num: '01',
@@ -29,40 +23,31 @@ export default function HowItWorks() {
   ]
 
   return (
-    <section className="how-section" id="how-it-works" ref={ref}>
+    <section className="how-section" id="how-it-works">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={reveal}
-        >
+        <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">How It Works</div>
           <h2 className="section-title">Three Steps to Your Perfect Fit</h2>
           <p className="section-subtitle">
             A simple, intuitive workflow powered by advanced AI and clean design.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.ol
-          className="how-steps"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={stagger}
-        >
+        <ol className="how-steps">
           {steps.map((step, i) => (
-            <motion.li
+            <li
               key={i}
               className="how-step"
-              variants={reveal}
+              data-scroll-reveal
+              style={{ '--reveal-delay': `${i * 70}ms` }}
             >
               <div className="how-step-number" aria-hidden="true">{step.num}</div>
               <div className="how-step-icon" aria-hidden="true">{step.icon}</div>
               <h3>{step.title}</h3>
               <p>{step.desc}</p>
-            </motion.li>
+            </li>
           ))}
-        </motion.ol>
+        </ol>
       </div>
     </section>
   )
