@@ -1,11 +1,4 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { reveal, stagger } from '../../utils/animations'
-
 export default function WhySection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const reasons = [
     {
       title: 'No More Wrong Sizes',
@@ -17,7 +10,7 @@ export default function WhySection() {
     },
     {
       title: 'Real AI, Real Results',
-      desc: 'Powered by Google Gemini 2.5 Flash with 85–95% confidence scores, not generic sizing charts or rough estimates.',
+      desc: 'Powered by Google Gemini 2.5 Flash with 85-95% confidence scores, not generic sizing charts or rough estimates.',
     },
     {
       title: 'Built for Everyone',
@@ -26,35 +19,30 @@ export default function WhySection() {
   ]
 
   return (
-    <section className="why-section" ref={ref}>
+    <section className="why-section">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={reveal}
-        >
+        <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">Why Loomeé</div>
           <h2 className="section-title">Why Choose Loomeé?</h2>
           <p className="section-subtitle">
             A virtual fitting platform built to be accurate, private, and genuinely useful.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="why-grid"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={stagger}
-        >
+        <div className="why-grid">
           {reasons.map((reason, i) => (
-            <motion.div key={i} className="why-card" variants={reveal}>
+            <div
+              key={i}
+              className="why-card"
+              data-scroll-reveal
+              style={{ '--reveal-delay': `${i * 70}ms` }}
+            >
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
               <p>{reason.desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
