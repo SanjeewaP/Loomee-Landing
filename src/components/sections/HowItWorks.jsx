@@ -6,19 +6,19 @@ export default function HowItWorks() {
       num: '01',
       icon: <Upload size={28} />,
       title: 'Upload Your Photo',
-      desc: 'Take or upload a full-body photo. Loomeé securely processes your image to understand your body proportions and measurements.',
+      desc: 'Snap a full-body photo or pick one from your camera roll. That is all we need to get started.',
     },
     {
       num: '02',
       icon: <Shirt size={28} />,
-      title: 'Browse & Select Clothing',
-      desc: "Explore our clothing catalog or upload any garment image. Our AI instantly analyzes the clothing's style, color, fabric, and sizing.",
+      title: 'Pick Something to Wear',
+      desc: 'Browse our catalog or drop in any garment image you like. Loomeé reads the style, fit, and sizing on its own.',
     },
     {
       num: '03',
       icon: <Wand2 size={28} />,
-      title: 'Get AI-Powered Results',
-      desc: 'Receive instant fit analysis, size recommendations with confidence scores, virtual try-on previews, and personalized style advice.',
+      title: 'See Your Results',
+      desc: 'Get your size, see the outfit on you, and find out exactly how it fits. All in a few seconds.',
     },
   ]
 
@@ -29,7 +29,7 @@ export default function HowItWorks() {
           <div className="section-eyebrow">How It Works</div>
           <h2 className="section-title">Three Steps to Your Perfect Fit</h2>
           <p className="section-subtitle">
-            A simple, intuitive workflow powered by advanced AI and clean design.
+            It is quick, and it works. No technical setup, no complicated steps.
           </p>
         </div>
 

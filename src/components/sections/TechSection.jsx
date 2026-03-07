@@ -26,10 +26,10 @@ export default function TechSection() {
       <div className="container">
         <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">Technology</div>
-          <h2 className="section-title">Built with Modern Tech</h2>
+          <h2 className="section-title">Built on Tools We Trust</h2>
           <p className="section-subtitle">
-            Loomeé combines cutting-edge AI models with robust cloud infrastructure
-            to deliver a fast, secure, and reliable experience.
+            Fast AI, solid cloud infrastructure, and security that does not cut
+            corners. Here is what powers Loomeé.
           </p>
         </div>
 

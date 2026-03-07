@@ -22,9 +22,8 @@ export default function HeroSection() {
         </h1>
 
         <p className="hero-description">
-          Loomeé is an AI-powered virtual fitting room that lets you try on clothes
-          digitally with real-time body analysis, personalized size recommendations,
-          and intelligent style insights.
+          Loomeé is your virtual fitting room. Upload a photo, pick something you
+          like, and see exactly how it fits before you buy it.
         </p>
 
         <div className="hero-buttons">

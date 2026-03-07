@@ -6,28 +6,28 @@ export default function FAQSection() {
 
   const faqs = [
     {
-      q: 'How does Loomeé analyze my body measurements?',
-      a: 'Loomeé uses Google Gemini 2.5 Flash, an advanced AI vision model, to analyze your uploaded body photos. The AI detects key body points and calculates proportions including chest, waist, hips, and height measurements with high accuracy.',
+      q: 'How does Loomeé read my measurements?',
+      a: 'It uses Google Gemini 2.5 Flash to analyse your photo. The model picks out key reference points on your body and works out your proportions, including chest, waist, hips, and height, from a single image.',
     },
     {
-      q: 'Is my personal data and body photos safe?',
-      a: 'Absolutely. Your images are stored securely on Cloudinary with encrypted URLs. Authentication uses JWT tokens, and our MongoDB Atlas database employs industry-standard encryption. We never sell or share your personal data.',
+      q: 'Are my photos and personal data safe?',
+      a: 'Yes. Photos are stored on Cloudinary with encrypted URLs, and all account data sits in an encrypted MongoDB Atlas database. We use JWT authentication and we do not sell or share anything. Ever.',
     },
     {
       q: 'How accurate are the size recommendations?',
-      a: 'Our AI delivers recommendations with confidence scores ranging from 85% to 95%. The system compares your unique measurements against specific garment sizing data, not generic size charts, for the most accurate fit prediction possible.',
+      a: 'Each recommendation comes with a confidence score between 85% and 95%. We compare your measurements to the actual garment dimensions, not a generic size chart, so the results are a lot more reliable than most.',
     },
     {
-      q: 'What is the virtual try-on feature?',
-      a: 'The virtual try-on uses Replicate API to generate AI-powered images showing how clothing items would look on your body. Combined with our body analysis, you get a realistic preview of fit and style before making a purchase.',
+      q: 'What is the virtual try-on?',
+      a: 'It generates an image of the garment on your body using Replicate. Combined with the fit analysis, you get a realistic sense of how something will look and fit before you decide to buy it.',
     },
     {
-      q: 'Does Loomeé work with any clothing brand?',
-      a: "Yes! You can explore our built-in catalog or upload any clothing image. Our AI examines key visual details like color, style, and fabric type to generate recommendations, no matter the brand.",
+      q: 'Does it work with any brand?',
+      a: "Yes. Browse our catalog or upload a photo of any garment from any brand. Loomeé reads the colour, cut, fabric, and style to give you a recommendation.",
     },
     {
-      q: 'What platforms is Loomeé available on?',
-      a: 'Loomeé is built as a cross-platform Flutter mobile app available on both iOS and Android. The backend API is cloud-hosted on Render with 99.9% uptime, ensuring a seamless experience on any device.',
+      q: 'What platforms is Loomeé on?',
+      a: 'It is a Flutter app, so it runs on both iOS and Android. The backend is hosted on Render and stays up reliably, so you can use it whenever you need it.',
     },
   ]
 
@@ -38,7 +38,7 @@ export default function FAQSection() {
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle">
-            Everything you need to know about Loomeé and how it works.
+            Got a question? Here are the ones we hear most often.
           </p>
         </div>
 

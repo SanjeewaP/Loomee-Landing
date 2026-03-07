@@ -4,33 +4,33 @@ export default function FeaturesSection() {
   const features = [
     {
       icon: <Scan size={22} />,
-      title: 'AI Body Analysis',
-      desc: 'Advanced computer vision powered by Google Gemini 2.5 Flash analyzes your body measurements and proportions from uploaded photos.',
+      title: 'Body Analysis',
+      desc: 'Upload a full-body photo and Gemini 2.5 Flash reads your measurements automatically. No tape measure needed.',
     },
     {
       icon: <Ruler size={22} />,
-      title: 'Smart Size Recommendations',
-      desc: 'Get precise size suggestions by comparing your unique body data against garment dimensions, including fit, stretch, and style.',
+      title: 'Size Recommendations',
+      desc: 'We match your measurements to the actual garment dimensions, not a generic size chart, so the result is much more reliable.',
     },
     {
       icon: <Palette size={22} />,
-      title: 'Style Intelligence',
-      desc: 'AI-driven fashion recommendations suggest complementary pieces, colors, and outfit combinations tailored to your preferences.',
+      title: 'Style Suggestions',
+      desc: 'Get outfit ideas that suit you. Loomeé suggests pieces, colours, and combinations based on what you already like.',
     },
     {
       icon: <Eye size={22} />,
-      title: 'Virtual Try-On Preview',
-      desc: "See how clothing looks on you with AI-generated overlays using Replicate's advanced image generation models.",
+      title: 'Virtual Try-On',
+      desc: "See what a garment actually looks like on your body before you commit to buying it.",
     },
     {
       icon: <Brain size={22} />,
-      title: 'Confidence Scoring',
-      desc: 'Every recommendation comes with a confidence score (85-95%) so you know exactly how reliable the fit analysis is.',
+      title: 'Confidence Scores',
+      desc: 'Every recommendation includes a score so you know how certain the fit analysis is, not just a vague guess.',
     },
     {
       icon: <RefreshCw size={22} />,
       title: 'Try-On History',
-      desc: 'Save and revisit all your virtual try-ons. Compare different outfits and track your style evolution over time.',
+      desc: 'Save and revisit your past try-ons. Useful for comparing options or just going back to something you liked.',
     },
   ]
 
@@ -39,10 +39,10 @@ export default function FeaturesSection() {
       <div className="container">
         <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">Features</div>
-          <h2 className="section-title">Empower Your Wardrobe with AI</h2>
+          <h2 className="section-title">Everything You Need for a Better Fit</h2>
           <p className="section-subtitle">
-            Experience the future of fashion technology with intelligent analysis,
-            real-time recommendations, and virtual try-on capabilities.
+            Body analysis, size recommendations that actually work, and a virtual
+            try-on. All in one app.
           </p>
         </div>
 

@@ -2,19 +2,19 @@ export default function WhySection() {
   const reasons = [
     {
       title: 'No More Wrong Sizes',
-      desc: 'Our AI compares your exact measurements against garment sizing data, eliminating the guesswork from online shopping.',
+      desc: 'We match your measurements to the actual garment, not a size guide. No more ordering two sizes just in case.',
     },
     {
-      title: 'Privacy-First Design',
-      desc: 'Your body photos are processed securely via Cloudinary with encrypted storage. We never sell or share your personal data.',
+      title: 'Your Photos Stay Private',
+      desc: 'Images are stored with encryption and never shared or sold. We only use them to give you a fit result.',
     },
     {
-      title: 'Real AI, Real Results',
-      desc: 'Powered by Google Gemini 2.5 Flash with 85-95% confidence scores, not generic sizing charts or rough estimates.',
+      title: 'Real Results, Not Estimates',
+      desc: 'Google Gemini 2.5 Flash gives each recommendation a real confidence score between 85% and 95%. Not a guess.',
     },
     {
-      title: 'Built for Everyone',
-      desc: "Whether you're a student shopping online or a fashion enthusiast exploring styles, Loomeé adapts to your needs.",
+      title: 'Works for Everyone',
+      desc: "Casual shopper or total fashion nerd, Loomeé works the same way. Just show it what you want to wear.",
     },
   ]
 
@@ -25,7 +25,7 @@ export default function WhySection() {
           <div className="section-eyebrow">Why Loomeé</div>
           <h2 className="section-title">Why Choose Loomeé?</h2>
           <p className="section-subtitle">
-            A virtual fitting platform built to be accurate, private, and genuinely useful.
+            Accurate, private, and actually useful. Here is what sets Loomeé apart.
           </p>
         </div>
 
