@@ -4,12 +4,11 @@ export default function MarqueeStrip() {
     'Style Recommendations', 'Confidence Score', 'Real-Time Fit', 'Fashion AI',
     'Personalized Results', 'Clothing Overlay', 'Measurement Mapping', 'Trend Insights',
   ]
-  const doubled = [...items, ...items]
 
   return (
-    <div className="marquee-strip" aria-hidden="true">
+    <div className="marquee-strip" data-scroll-reveal>
       <div className="marquee-track">
-        {doubled.map((item, i) => (
+        {items.map((item, i) => (
           <span key={i}><span className="dot" />{item}</span>
         ))}
       </div>
