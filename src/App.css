@@ -104,11 +104,12 @@
 }
 
 .marquee-track span .dot {
+  display: block;
   width: 4px;
   height: 4px;
   border-radius: 50%;
   background: var(--terracotta-500);
-  flex-shrink: 0;
+  flex: 0 0 4px;
 }
 
 /* ---- NAVBAR ---- */
