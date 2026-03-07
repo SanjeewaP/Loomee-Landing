@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { MotionConfig } from 'framer-motion'
 import NavigateContext from './context/NavigateContext'
+import useScrollReveal from './hooks/useScrollReveal'
 import './App.css'
 
 /* Layout */
@@ -27,6 +28,7 @@ import CookiePolicyPage from './pages/CookiePolicyPage'
 
 export default function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
+  useScrollReveal(pathname)
 
   // Keep state in sync with browser back/forward buttons
   useEffect(() => {
