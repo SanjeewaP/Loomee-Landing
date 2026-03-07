@@ -1,12 +1,6 @@
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
 import { Scan, Ruler, Palette, Eye, Brain, RefreshCw } from 'lucide-react'
-import { reveal, stagger } from '../../utils/animations'
 
 export default function FeaturesSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true, margin: '-100px' })
-
   const features = [
     {
       icon: <Scan size={22} />,
@@ -41,40 +35,31 @@ export default function FeaturesSection() {
   ]
 
   return (
-    <section className="features-section" id="features" ref={ref}>
+    <section className="features-section" id="features">
       <div className="container">
-        <motion.div
-          className="section-header"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={reveal}
-        >
+        <div className="section-header" data-scroll-reveal>
           <div className="section-eyebrow">Features</div>
           <h2 className="section-title">Empower Your Wardrobe with AI</h2>
           <p className="section-subtitle">
             Experience the future of fashion technology with intelligent analysis,
             real-time recommendations, and virtual try-on capabilities.
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          className="features-grid"
-          initial="hidden"
-          animate={isInView ? 'visible' : 'hidden'}
-          variants={stagger}
-        >
+        <div className="features-grid">
           {features.map((feature, i) => (
-            <motion.div
+            <div
               key={i}
               className="feature-card"
-              variants={reveal}
+              data-scroll-reveal
+              style={{ '--reveal-delay': `${i * 70}ms` }}
             >
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
               <p>{feature.desc}</p>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )
