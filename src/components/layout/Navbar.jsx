@@ -44,7 +44,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main navigation" data-scroll-reveal>
+      <nav className={`navbar ${scrolled ? 'scrolled' : ''}`} aria-label="Main navigation">
         <div className="navbar-inner">
           <NavLink href="/" className="navbar-logo">
             <img src="/Logo.png" alt="Loomeé logo" className="logo-icon" />
