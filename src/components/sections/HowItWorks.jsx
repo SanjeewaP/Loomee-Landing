@@ -38,8 +38,8 @@ export default function HowItWorks() {
             <li
               key={i}
               className="how-step"
-              data-scroll-reveal
-              style={{ '--reveal-delay': `${i * 70}ms` }}
+              data-scroll-reveal="from-left"
+              style={{ '--reveal-delay': `${i * 110}ms` }}
             >
               <div className="how-step-number" aria-hidden="true">{step.num}</div>
               <div className="how-step-icon" aria-hidden="true">{step.icon}</div>

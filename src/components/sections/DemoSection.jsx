@@ -14,8 +14,8 @@ export default function DemoSection() {
   return (
     <section className="demo-section" id="demo">
       <div className="container">
-        <div className="demo-container" data-scroll-reveal>
-          <div className="demo-content">
+        <div className="demo-container">
+          <div className="demo-content" data-scroll-reveal="from-left">
             <div className="section-eyebrow">Live Demo</div>
             <h2>See Loomeé in Action</h2>
             <p>
@@ -41,7 +41,7 @@ export default function DemoSection() {
             </a>
           </div>
 
-          <div className="demo-visual" aria-hidden="true">
+          <div className="demo-visual" aria-hidden="true" data-scroll-reveal="from-right">
             <PhoneMockup />
           </div>
         </div>

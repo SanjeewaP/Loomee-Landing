@@ -9,7 +9,7 @@ export default function HeroSection() {
       <div className="hero-bg-gradient" aria-hidden="true" />
       <div className="hero-grid-lines" aria-hidden="true" />
 
-      <div className="hero-content" data-scroll-reveal>
+      <div className="hero-content">
         <div className="hero-badge">
           <span className="badge-dot" aria-hidden="true" />
           Powered by Gemini and Replicate
@@ -57,7 +57,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="hero-mockup-area" aria-hidden="true" data-scroll-reveal>
+      <div className="hero-mockup-area" aria-hidden="true">
         <div style={{ position: 'relative' }}>
           <PhoneMockup />
           <div className="floating-card fc-left">

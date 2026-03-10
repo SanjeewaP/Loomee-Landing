@@ -34,8 +34,8 @@ export default function WhySection() {
             <div
               key={i}
               className="why-card"
-              data-scroll-reveal
-              style={{ '--reveal-delay': `${i * 70}ms` }}
+              data-scroll-reveal={i % 2 === 0 ? 'from-left' : 'from-right'}
+              style={{ '--reveal-delay': `${i * 90}ms` }}
             >
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
               <h3>{reason.title}</h3>
