@@ -1,6 +1,11 @@
+import { useRef } from 'react'
 import { Scan, Ruler, Palette, Eye, Brain, RefreshCw } from 'lucide-react'
+import useCardSpotlight from '../../hooks/useCardSpotlight'
 
 export default function FeaturesSection() {
+  const gridRef = useRef(null)
+  useCardSpotlight(gridRef)
+
   const features = [
     {
       icon: <Scan size={22} />,
@@ -46,11 +51,12 @@ export default function FeaturesSection() {
           </p>
         </div>
 
-        <div className="features-grid">
+        <div className="features-grid" ref={gridRef}>
           {features.map((feature, i) => (
             <div
               key={i}
               className="feature-card"
+              data-spotlight
               data-scroll-reveal="blur-up"
               style={{ '--reveal-delay': `${i * 100}ms` }}
             >

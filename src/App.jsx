@@ -12,6 +12,8 @@ import CookieBanner from './components/layout/CookieBanner'
 /* Sections */
 import HeroSection from './components/sections/HeroSection'
 import MarqueeStrip from './components/ui/MarqueeStrip'
+import ScrollProgress from './components/ui/ScrollProgress'
+import CursorGlow from './components/ui/CursorGlow'
 import FeaturesSection from './components/sections/FeaturesSection'
 import HowItWorks from './components/sections/HowItWorks'
 import DemoSection from './components/sections/DemoSection'
@@ -65,6 +67,8 @@ export default function App() {
     return (
       <>
         <div className="noise-overlay" aria-hidden="true" />
+        <CursorGlow />
+        <ScrollProgress />
         <Navbar />
         <main id="main-content">
           <HeroSection />
