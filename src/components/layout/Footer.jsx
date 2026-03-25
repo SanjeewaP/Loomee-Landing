@@ -1,4 +1,4 @@
-import { Github, Instagram, Mail } from 'lucide-react'
+import { Github, Instagram, Youtube, Mail } from 'lucide-react'
 import NavLink from '../ui/NavLink'
 
 export default function Footer() {
@@ -55,6 +55,9 @@ export default function Footer() {
             </a>
             <a href="https://www.instagram.com/loomeevto/" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="Instagram">
               <Instagram size={16} />
+            </a>
+            <a href="https://youtube.com/@loomee_vto" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="YouTube">
+              <Youtube size={16} />
             </a>
             <a href="mailto:loomeevto@gmail.com" className="footer-social-link" aria-label="Email">
               <Mail size={16} />
