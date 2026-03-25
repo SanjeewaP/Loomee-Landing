@@ -16,7 +16,8 @@ export default function useSmoothScroll() {
     let rafId = null
     let isRunning = false
 
-    const ease = 0.12 // Lower = smoother but more latent, 0.12 is a nice sweet spot
+    const ease = 0.08       // Interpolation speed per frame (lower = smoother glide)
+    const sensitivity = 0.4  // Dampen wheel delta (0.4 = 40% of raw value)
 
     function animate() {
       current += (target - current) * ease
@@ -36,8 +37,8 @@ export default function useSmoothScroll() {
     function onWheel(e) {
       e.preventDefault()
 
-      // Accumulate the delta onto the target
-      target += e.deltaY
+      // Dampen the delta so each notch doesn't jump too far
+      target += e.deltaY * sensitivity
 
       // Clamp to page bounds
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight
