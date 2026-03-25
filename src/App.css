@@ -2906,10 +2906,20 @@ button.legal-back:focus-visible {
   color: var(--terracotta-400);
 }
 
-/* How-step number */
-[data-theme="dark"] .how-step-number {
-  background: rgba(181, 103, 61, 0.12);
+/* How-step icon + number */
+[data-theme="dark"] .how-step-icon {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   color: var(--terracotta-400);
+}
+
+[data-theme="dark"] .how-step-number {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 8px 24px rgba(181, 103, 61, 0.3);
 }
 
 /* Testimonial stars */
