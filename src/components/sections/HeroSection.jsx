@@ -7,7 +7,7 @@ import ParticleNetwork from '../ui/ParticleNetwork'
 export default function HeroSection() {
   return (
     <section className="hero" id="hero">
-      <ParticleNetwork particleCount={70} color="#B5673D" maxDistance={130} />
+      <ParticleNetwork particleCount={50} color="#B5673D" />
       <div className="hero-bg-gradient" aria-hidden="true" />
       <div className="hero-orb hero-orb-1" aria-hidden="true" />
       <div className="hero-orb hero-orb-2" aria-hidden="true" />

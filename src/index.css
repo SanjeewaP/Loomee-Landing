@@ -63,6 +63,36 @@
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* ---- DARK THEME ---- */
+[data-theme="dark"] {
+  --bg-primary: #141618;
+  --bg-secondary: #1C1F22;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-card-hover: rgba(255, 255, 255, 0.09);
+  --text-primary: #EDEDEC;
+  --text-secondary: #B0B8BF;
+  --text-muted: #7D8A94;
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-medium: rgba(255, 255, 255, 0.12);
+}
+
+[data-theme="dark"] body {
+  background: #141618;
+  color: #EDEDEC;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #141618;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #4A3528;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #B5673D;
+}
+
 /* Reset & Base */
 *, *::before, *::after {
   margin: 0;
