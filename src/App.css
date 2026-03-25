@@ -2288,7 +2288,6 @@ button.legal-back:focus-visible {
   height: 100%;
   background: var(--gradient-primary);
   box-shadow: 0 0 12px rgba(181, 103, 61, 0.5);
-  transition: width 0.1s linear;
   border-radius: 0 2px 2px 0;
 }
 
@@ -2659,4 +2658,261 @@ button.legal-back:focus-visible {
     transform: none !important;
     transition: none !important;
   }
+}
+
+/* ============================================
+   DARK MODE TOGGLE
+   ============================================ */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease-out-quart);
+}
+
+.dark-mode-toggle:hover {
+  transform: scale(1.08);
+}
+
+.dark-mode-toggle:active {
+  transform: scale(0.95);
+}
+
+.toggle-track {
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 26px;
+  border-radius: 13px;
+  background: var(--border-medium);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  position: relative;
+  transition: background 0.3s ease, border-color 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.toggle-thumb {
+  position: absolute;
+  left: 3px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--terracotta-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: left 0.3s var(--ease-out-expo), background 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] .toggle-thumb {
+  left: 25px;
+  background: var(--terracotta-400);
+}
+
+[data-theme="dark"] .toggle-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   DARK MODE — COMPONENT OVERRIDES
+   ============================================ */
+
+/* Hero */
+[data-theme="dark"] .hero-bg-gradient {
+  background: radial-gradient(ellipse 80% 60% at 50% 20%, rgba(181, 103, 61, 0.08), transparent 70%);
+}
+
+[data-theme="dark"] .hero-grid-lines {
+  opacity: 0.03;
+}
+
+/* Hero stats bar */
+[data-theme="dark"] .hero-stats {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border-subtle);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .hero-stat-divider {
+  background: var(--border-medium);
+}
+
+[data-theme="dark"] .hero-badge {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+/* Floating cards */
+[data-theme="dark"] .floating-card {
+  background: rgba(28, 31, 34, 0.85);
+  border-color: var(--border-subtle);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .floating-card .fc-value.success {
+  color: #6ee7b7;
+}
+
+[data-theme="dark"] .floating-card .fc-value.purple {
+  color: var(--terracotta-400);
+}
+
+/* Navbar */
+[data-theme="dark"] .navbar {
+  background: rgba(20, 22, 24, 0.85);
+  border-bottom-color: var(--border-subtle);
+}
+
+[data-theme="dark"] .navbar.scrolled {
+  background: rgba(20, 22, 24, 0.92);
+  backdrop-filter: blur(20px);
+}
+
+/* Marquee */
+[data-theme="dark"] .marquee-strip {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .marquee-track .dot {
+  background: var(--terracotta-400);
+}
+
+/* All glass cards — override white-based glass for dark mode */
+[data-theme="dark"] .feature-card,
+[data-theme="dark"] .tech-card,
+[data-theme="dark"] .why-card,
+[data-theme="dark"] .how-step,
+[data-theme="dark"] .testimonial-card,
+[data-theme="dark"] .faq-item {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border-subtle);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .feature-card:hover,
+[data-theme="dark"] .tech-card:hover,
+[data-theme="dark"] .why-card:hover,
+[data-theme="dark"] .how-step:hover,
+[data-theme="dark"] .testimonial-card:hover,
+[data-theme="dark"] .faq-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border-medium);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Section eyebrows */
+[data-theme="dark"] .section-eyebrow {
+  color: var(--terracotta-400);
+  background: rgba(181, 103, 61, 0.1);
+  border-color: rgba(181, 103, 61, 0.2);
+}
+
+/* Demo section — the main glass container */
+[data-theme="dark"] .demo-container {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .demo-container::before {
+  background: radial-gradient(circle 400px at 30% 0%, rgba(181, 103, 61, 0.06), transparent);
+}
+
+[data-theme="dark"] .demo-visual-wrapper {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .demo-feature-list li .demo-check {
+  color: var(--terracotta-400);
+}
+
+/* CTA section */
+[data-theme="dark"] .cta-container {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-color: var(--border-subtle);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Buttons */
+[data-theme="dark"] .btn-primary {
+  box-shadow: 0 4px 16px rgba(181, 103, 61, 0.3);
+}
+
+[data-theme="dark"] .btn-outline {
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .btn-outline:hover {
+  background: rgba(181, 103, 61, 0.1);
+  border-color: var(--terracotta-500);
+}
+
+/* Footer */
+[data-theme="dark"] .footer {
+  background: var(--bg-secondary);
+  border-top-color: var(--border-subtle);
+}
+
+/* Utilities */
+[data-theme="dark"] .cursor-glow {
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.08) 0%, rgba(181, 103, 61, 0.03) 35%, transparent 70%);
+}
+
+[data-theme="dark"] .noise-overlay {
+  opacity: 0.04;
+}
+
+[data-theme="dark"] .mobile-menu {
+  background: rgba(20, 22, 24, 0.96);
+  backdrop-filter: blur(20px);
+}
+
+[data-theme="dark"] .cookie-banner {
+  background: var(--bg-secondary);
+  border-color: var(--border-subtle);
+}
+
+/* Section decorative blurred orbs */
+[data-theme="dark"] .why-section::before,
+[data-theme="dark"] .why-section::after {
+  opacity: 0.4;
+}
+
+/* Feature icon containers */
+[data-theme="dark"] .feature-icon,
+[data-theme="dark"] .tech-card-icon {
+  background: rgba(181, 103, 61, 0.12);
+  color: var(--terracotta-400);
+}
+
+/* How-step number */
+[data-theme="dark"] .how-step-number {
+  background: rgba(181, 103, 61, 0.12);
+  color: var(--terracotta-400);
+}
+
+/* Testimonial stars */
+[data-theme="dark"] .testimonial-stars {
+  color: var(--terracotta-400);
 }

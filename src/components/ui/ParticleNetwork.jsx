@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react'
 
 /**
- * Renders a canvas with floating particles connected by fading lines.
+ * Renders a canvas with gently floating dots of varying sizes.
  * Adapted to Loomee's warm terracotta palette.
  */
 export default function ParticleNetwork({
-  particleCount = 80,
+  particleCount = 50,
   color = '#B5673D',
-  maxDistance = 140,
   className = '',
 }) {
   const canvasRef = useRef(null)
@@ -39,45 +38,27 @@ export default function ParticleNetwork({
       particles = Array.from({ length: particleCount }, () => ({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        radius: 1 + Math.random() * 3,
+        opacity: 0.15 + Math.random() * 0.35,
       }))
     }
 
     function draw() {
       ctx.clearRect(0, 0, width, height)
 
-      // Update positions
       for (const p of particles) {
         p.x += p.vx
         p.y += p.vy
-        if (p.x < 0 || p.x > width) p.vx *= -1
-        if (p.y < 0 || p.y > height) p.vy *= -1
-      }
+        if (p.x < -p.radius) p.x = width + p.radius
+        else if (p.x > width + p.radius) p.x = -p.radius
+        if (p.y < -p.radius) p.y = height + p.radius
+        else if (p.y > height + p.radius) p.y = -p.radius
 
-      // Draw connections
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x
-          const dy = particles[i].y - particles[j].y
-          const dist = Math.sqrt(dx * dx + dy * dy)
-          if (dist < maxDistance) {
-            const alpha = 0.2 * (1 - dist / maxDistance)
-            ctx.strokeStyle = `rgba(${r},${g},${b},${alpha})`
-            ctx.lineWidth = 0.8
-            ctx.beginPath()
-            ctx.moveTo(particles[i].x, particles[i].y)
-            ctx.lineTo(particles[j].x, particles[j].y)
-            ctx.stroke()
-          }
-        }
-      }
-
-      // Draw particles
-      for (const p of particles) {
         ctx.beginPath()
-        ctx.arc(p.x, p.y, 1.5, 0, Math.PI * 2)
-        ctx.fillStyle = `rgba(${r},${g},${b},0.45)`
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(${r},${g},${b},${p.opacity})`
         ctx.fill()
       }
 
@@ -88,16 +69,14 @@ export default function ParticleNetwork({
     createParticles()
     draw()
 
-    window.addEventListener('resize', () => {
-      resize()
-      createParticles()
-    })
+    const onResize = () => { resize(); createParticles() }
+    window.addEventListener('resize', onResize)
 
     return () => {
       cancelAnimationFrame(animId)
-      window.removeEventListener('resize', resize)
+      window.removeEventListener('resize', onResize)
     }
-  }, [particleCount, color, maxDistance])
+  }, [particleCount, color])
 
   return (
     <canvas

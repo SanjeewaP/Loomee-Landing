@@ -14,12 +14,12 @@ import HeroSection from './components/sections/HeroSection'
 import MarqueeStrip from './components/ui/MarqueeStrip'
 import ScrollProgress from './components/ui/ScrollProgress'
 import CursorGlow from './components/ui/CursorGlow'
+import DarkModeToggle from './components/ui/DarkModeToggle'
 import FeaturesSection from './components/sections/FeaturesSection'
 import HowItWorks from './components/sections/HowItWorks'
 import DemoSection from './components/sections/DemoSection'
 import TechSection from './components/sections/TechSection'
 import WhySection from './components/sections/WhySection'
-import TestimonialsSection from './components/sections/TestimonialsSection'
 import FAQSection from './components/sections/FAQSection'
 import CTASection from './components/sections/CTASection'
 
@@ -69,6 +69,7 @@ export default function App() {
         <div className="noise-overlay" aria-hidden="true" />
         <CursorGlow />
         <ScrollProgress />
+        <DarkModeToggle />
         <Navbar />
         <main id="main-content">
           <HeroSection />
@@ -78,7 +79,6 @@ export default function App() {
           <DemoSection />
           <TechSection />
           <WhySection />
-          <TestimonialsSection />
           <FAQSection />
           <CTASection />
         </main>
