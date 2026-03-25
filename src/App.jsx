@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import NavigateContext from './context/NavigateContext'
 import useScrollReveal from './hooks/useScrollReveal'
 import useHeroParallax from './hooks/useHeroParallax'
+import useSmoothScroll from './hooks/useSmoothScroll'
 import './App.css'
 
 /* Layout */
@@ -32,6 +33,7 @@ export default function App() {
   const [pathname, setPathname] = useState(() => window.location.pathname)
   useScrollReveal(pathname)
   useHeroParallax()
+  useSmoothScroll()
 
   // Keep state in sync with browser back/forward buttons
   useEffect(() => {
