@@ -1,4 +1,9 @@
+import { useRef } from 'react'
+import useCardSpotlight from '../../hooks/useCardSpotlight'
+
 export default function WhySection() {
+  const gridRef = useRef(null)
+  useCardSpotlight(gridRef)
   const reasons = [
     {
       title: 'No More Wrong Sizes',
@@ -29,12 +34,13 @@ export default function WhySection() {
           </p>
         </div>
 
-        <div className="why-grid">
+        <div className="why-grid" ref={gridRef}>
           {reasons.map((reason, i) => (
             <div
               key={i}
               className="why-card"
-              data-scroll-reveal="blur-up"
+              data-spotlight
+              data-scroll-reveal={i % 2 === 0 ? 'from-left-far' : 'from-right-far'}
               style={{ '--reveal-delay': `${i * 120}ms` }}
             >
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>

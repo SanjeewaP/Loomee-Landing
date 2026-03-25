@@ -1,6 +1,10 @@
+import { useRef } from 'react'
 import { Upload, Shirt, Wand2 } from 'lucide-react'
+import useCardSpotlight from '../../hooks/useCardSpotlight'
 
 export default function HowItWorks() {
+  const stepsRef = useRef(null)
+  useCardSpotlight(stepsRef)
   const steps = [
     {
       num: '01',
@@ -33,11 +37,12 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        <ol className="how-steps">
+        <ol className="how-steps" ref={stepsRef}>
           {steps.map((step, i) => (
             <li
               key={i}
               className="how-step"
+              data-spotlight
               data-scroll-reveal="scale-rotate"
               style={{ '--reveal-delay': `${i * 150}ms` }}
             >

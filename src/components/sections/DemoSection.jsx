@@ -13,7 +13,7 @@ export default function DemoSection() {
     <section className="demo-section" id="demo">
       <div className="container">
         <div className="demo-container">
-          <div className="demo-content" data-scroll-reveal="blur-up">
+          <div className="demo-content" data-scroll-reveal="from-left-far">
             <div className="section-eyebrow">Live Demo</div>
             <h2>Watch Loomeé in Action</h2>
             <p>
@@ -31,7 +31,7 @@ export default function DemoSection() {
             </ul>
           </div>
 
-          <div className="demo-visual" data-scroll-reveal="blur-up" style={{ '--reveal-delay': '150ms' }}>
+          <div className="demo-visual" data-scroll-reveal="from-right-far" style={{ '--reveal-delay': '150ms' }}>
             <a
               href="https://youtu.be/pjU_Xq-G6bU?si=tN2zmgS7_zat8k7m"
               target="_blank"

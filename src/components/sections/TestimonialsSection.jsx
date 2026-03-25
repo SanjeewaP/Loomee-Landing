@@ -1,6 +1,10 @@
+import { useRef } from 'react'
 import { Star } from 'lucide-react'
+import useCardSpotlight from '../../hooks/useCardSpotlight'
 
 export default function TestimonialsSection() {
+  const gridRef = useRef(null)
+  useCardSpotlight(gridRef)
   const testimonials = [
     {
       text: '"Loomeé completely changed how I shop online. I used to return half my orders. Now I know exactly what size to pick before I buy."',
@@ -30,11 +34,12 @@ export default function TestimonialsSection() {
           <h2 className="section-title">What People Are Saying</h2>
         </div>
 
-        <div className="testimonials-grid">
+        <div className="testimonials-grid" ref={gridRef}>
           {testimonials.map((t, i) => (
             <article
               key={i}
               className="testimonial-card"
+              data-spotlight
               data-scroll-reveal="scale-rotate"
               style={{ '--reveal-delay': `${i * 120}ms` }}
             >

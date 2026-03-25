@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import {
   BrainCircuit,
   Palette,
@@ -8,8 +9,11 @@ import {
   Rocket,
   Lock,
 } from 'lucide-react'
+import useCardSpotlight from '../../hooks/useCardSpotlight'
 
 export default function TechSection() {
+  const gridRef = useRef(null)
+  useCardSpotlight(gridRef)
   const techs = [
     { icon: <BrainCircuit size={22} />, name: 'Google Gemini', desc: 'AI vision & analysis' },
     { icon: <Palette size={22} />, name: 'Replicate', desc: 'Virtual try-on generation' },
@@ -33,11 +37,12 @@ export default function TechSection() {
           </p>
         </div>
 
-        <div className="tech-grid">
+        <div className="tech-grid" ref={gridRef}>
           {techs.map((tech, i) => (
             <div
               key={i}
               className="tech-card"
+              data-spotlight
               data-scroll-reveal="blur-up"
               style={{ '--reveal-delay': `${i * 80}ms` }}
             >

@@ -2,11 +2,16 @@ import { ArrowRight } from 'lucide-react'
 import { trackEvent } from '../../utils/analytics'
 import CountUp from '../ui/CountUp'
 import PhoneMockup from '../ui/PhoneMockup'
+import ParticleNetwork from '../ui/ParticleNetwork'
 
 export default function HeroSection() {
   return (
     <section className="hero" id="hero">
+      <ParticleNetwork particleCount={70} color="#B5673D" maxDistance={130} />
       <div className="hero-bg-gradient" aria-hidden="true" />
+      <div className="hero-orb hero-orb-1" aria-hidden="true" />
+      <div className="hero-orb hero-orb-2" aria-hidden="true" />
+      <div className="hero-orb hero-orb-3" aria-hidden="true" />
       <div className="hero-grid-lines" aria-hidden="true" />
 
       <div className="hero-content">
@@ -18,7 +23,7 @@ export default function HeroSection() {
         <h1>
           Your style,
           <br />
-          <span className="highlight">perfectly fitted.</span>
+          <span className="highlight gradient-text">perfectly fitted.</span>
         </h1>
 
         <p className="hero-description">
