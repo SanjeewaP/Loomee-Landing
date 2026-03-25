@@ -21,15 +21,6 @@ export default function DemoSection() {
               your size, fit report, and virtual try-on. All in under a minute.
             </p>
 
-            <ul className="demo-features-list">
-              {features.map((f, i) => (
-                <li key={i} className="demo-feature-item">
-                  <div className="check-icon" aria-hidden="true"><CheckCircle2 size={14} /></div>
-                  {f}
-                </li>
-              ))}
-            </ul>
-
             <a
               href="https://youtu.be/pjU_Xq-G6bU?si=tN2zmgS7_zat8k7m"
               target="_blank"
@@ -39,6 +30,15 @@ export default function DemoSection() {
             >
               Watch the Demo <Play size={18} />
             </a>
+
+            <ul className="demo-features-list">
+              {features.map((f, i) => (
+                <li key={i} className="demo-feature-item">
+                  <div className="check-icon" aria-hidden="true"><CheckCircle2 size={14} /></div>
+                  {f}
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="demo-visual" data-scroll-reveal="blur-up" style={{ '--reveal-delay': '150ms' }}>
