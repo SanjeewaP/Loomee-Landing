@@ -21,16 +21,6 @@ export default function DemoSection() {
               your size, fit report, and virtual try-on. All in under a minute.
             </p>
 
-            <a
-              href="https://youtu.be/pjU_Xq-G6bU?si=tN2zmgS7_zat8k7m"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary btn-large"
-              onClick={() => trackEvent('demo_video_click', { location: 'demo' })}
-            >
-              Watch the Demo <Play size={18} />
-            </a>
-
             <ul className="demo-features-list">
               {features.map((f, i) => (
                 <li key={i} className="demo-feature-item">
@@ -56,7 +46,7 @@ export default function DemoSection() {
                 className="demo-thumb-img"
               />
               <div className="demo-play-overlay" aria-hidden="true">
-                <Play size={40} fill="white" />
+                <Play size={48} fill="white" />
               </div>
             </a>
           </div>

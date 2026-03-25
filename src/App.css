@@ -1066,8 +1066,8 @@
   border-radius: 28px;
   padding: 64px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 64px;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
   align-items: center;
   position: relative;
   overflow: hidden;
@@ -1098,10 +1098,6 @@
   font-size: 1.05rem;
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 32px;
-}
-
-.demo-content .btn-primary {
   margin-bottom: 32px;
 }
 
