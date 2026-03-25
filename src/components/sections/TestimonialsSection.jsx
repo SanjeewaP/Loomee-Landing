@@ -35,8 +35,8 @@ export default function TestimonialsSection() {
             <article
               key={i}
               className="testimonial-card"
-              data-scroll-reveal
-              style={{ '--reveal-delay': `${i * 70}ms` }}
+              data-scroll-reveal="scale-rotate"
+              style={{ '--reveal-delay': `${i * 120}ms` }}
             >
               <div className="testimonial-stars" aria-label="5 out of 5 stars">
                 {[...Array(5)].map((_, j) => (

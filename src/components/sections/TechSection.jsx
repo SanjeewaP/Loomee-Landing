@@ -38,8 +38,8 @@ export default function TechSection() {
             <div
               key={i}
               className="tech-card"
-              data-scroll-reveal="scale-up"
-              style={{ '--reveal-delay': `${i * 55}ms` }}
+              data-scroll-reveal="blur-up"
+              style={{ '--reveal-delay': `${i * 80}ms` }}
             >
               <div className="tech-card-icon" aria-hidden="true">{tech.icon}</div>
               <h4>{tech.name}</h4>

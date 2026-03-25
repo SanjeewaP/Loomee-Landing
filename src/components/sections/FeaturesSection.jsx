@@ -51,8 +51,8 @@ export default function FeaturesSection() {
             <div
               key={i}
               className="feature-card"
-              data-scroll-reveal
-              style={{ '--reveal-delay': `${i * 70}ms` }}
+              data-scroll-reveal="blur-up"
+              style={{ '--reveal-delay': `${i * 100}ms` }}
             >
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
               <h3>{feature.title}</h3>
