@@ -188,31 +188,37 @@ const server = createServer(async (req, res) => {
     const escapedPage = escapeHtml(page || '-')
     const escapedDate = escapeHtml(submittedAt)
 
-    await sendWithResend({
-      from: WAITLIST_FROM_EMAIL,
-      to: WAITLIST_NOTIFY_TO,
-      subject: `New ${APP_NAME} waitlist signup: ${name}`,
-      html: `
-        <h2>New ${APP_NAME} waitlist signup</h2>
-        <p><strong>Name:</strong> ${escapedName}</p>
-        <p><strong>Email:</strong> ${escapedEmail}</p>
-        <p><strong>Source:</strong> ${escapedSource}</p>
-        <p><strong>Page:</strong> ${escapedPage}</p>
-        <p><strong>Submitted:</strong> ${escapedDate}</p>
-      `,
-      text: [
-        `New ${APP_NAME} waitlist signup`,
-        `Name: ${name}`,
-        `Email: ${email}`,
-        `Source: ${source}`,
-        `Page: ${page || '-'}`,
-        `Submitted: ${submittedAt}`,
-      ].join('\n'),
-    })
+    // Respond immediately — send emails in the background so the user
+    // isn't blocked by Resend API latency.
+    sendJson(res, 200, { ok: true }, corsHeaders)
+
+    const emailTasks = [
+      sendWithResend({
+        from: WAITLIST_FROM_EMAIL,
+        to: WAITLIST_NOTIFY_TO,
+        subject: `New ${APP_NAME} waitlist signup: ${name}`,
+        html: `
+          <h2>New ${APP_NAME} waitlist signup</h2>
+          <p><strong>Name:</strong> ${escapedName}</p>
+          <p><strong>Email:</strong> ${escapedEmail}</p>
+          <p><strong>Source:</strong> ${escapedSource}</p>
+          <p><strong>Page:</strong> ${escapedPage}</p>
+          <p><strong>Submitted:</strong> ${escapedDate}</p>
+        `,
+        text: [
+          `New ${APP_NAME} waitlist signup`,
+          `Name: ${name}`,
+          `Email: ${email}`,
+          `Source: ${source}`,
+          `Page: ${page || '-'}`,
+          `Submitted: ${submittedAt}`,
+        ].join('\n'),
+      }),
+    ]
 
     if (WAITLIST_SEND_AUTOREPLY) {
-      try {
-        await sendWithResend({
+      emailTasks.push(
+        sendWithResend({
           from: WAITLIST_AUTOREPLY_FROM_EMAIL,
           to: [email],
           subject: `You're on the ${APP_NAME} waitlist`,
@@ -245,14 +251,17 @@ const server = createServer(async (req, res) => {
             '',
             `The ${APP_NAME} Team`,
           ].join('\n'),
-        })
-      } catch (autoReplyError) {
-        // Do not fail signup if optional auto-reply cannot be sent.
-        console.error('[waitlist-api] Auto-reply failed.', autoReplyError)
-      }
+        }),
+      )
     }
 
-    sendJson(res, 200, { ok: true }, corsHeaders)
+    Promise.allSettled(emailTasks).then(results => {
+      for (const result of results) {
+        if (result.status === 'rejected') {
+          console.error('[waitlist-api] Email send failed.', result.reason)
+        }
+      }
+    })
   } catch (error) {
     console.error('[waitlist-api] Failed to process waitlist request.', error)
     sendJson(res, 500, { ok: false, error: 'Unable to process signup right now.' }, corsHeaders)
