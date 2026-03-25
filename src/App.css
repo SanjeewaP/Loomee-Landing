@@ -1101,11 +1101,15 @@
   margin-bottom: 32px;
 }
 
+.demo-content .btn-primary {
+  margin-bottom: 32px;
+}
+
 .demo-features-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 36px;
+  margin-bottom: 0;
 }
 
 .demo-feature-item {
