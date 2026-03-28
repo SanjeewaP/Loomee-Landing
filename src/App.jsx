@@ -54,7 +54,7 @@ export default function App() {
       requestAnimationFrame(() => {
         const el = document.getElementById(hash)
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' })
+          el.scrollIntoView()
         }
       })
     } else {
