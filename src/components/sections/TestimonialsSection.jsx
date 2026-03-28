@@ -29,7 +29,7 @@ export default function TestimonialsSection() {
   return (
     <section className="testimonials-section">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">Testimonials</div>
           <h2 className="section-title">What People Are Saying</h2>
         </div>
@@ -40,7 +40,6 @@ export default function TestimonialsSection() {
               key={i}
               className="testimonial-card"
               data-spotlight
-              data-scroll-reveal="scale-rotate"
               style={{ '--reveal-delay': `${i * 120}ms` }}
             >
               <div className="testimonial-stars" aria-label="5 out of 5 stars">

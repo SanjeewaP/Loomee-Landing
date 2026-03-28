@@ -26,7 +26,7 @@ export default function WhySection() {
   return (
     <section className="why-section">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">Why Loomeé</div>
           <h2 className="section-title">Why Choose Loomeé?</h2>
           <p className="section-subtitle">
@@ -40,7 +40,6 @@ export default function WhySection() {
               key={i}
               className="why-card"
               data-spotlight
-              data-scroll-reveal={i % 2 === 0 ? 'from-left-far' : 'from-right-far'}
               style={{ '--reveal-delay': `${i * 120}ms` }}
             >
               <div className="why-card-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>

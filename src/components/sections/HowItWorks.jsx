@@ -29,7 +29,7 @@ export default function HowItWorks() {
   return (
     <section className="how-section" id="how-it-works">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">How It Works</div>
           <h2 className="section-title">Three Steps to Your Perfect Fit</h2>
           <p className="section-subtitle">
@@ -43,7 +43,6 @@ export default function HowItWorks() {
               key={i}
               className="how-step"
               data-spotlight
-              data-scroll-reveal="scale-rotate"
               style={{ '--reveal-delay': `${i * 150}ms` }}
             >
               <div className="how-step-number" aria-hidden="true">{step.num}</div>

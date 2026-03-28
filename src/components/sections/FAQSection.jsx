@@ -34,7 +34,7 @@ export default function FAQSection() {
   return (
     <section className="faq-section" id="faq">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">FAQ</div>
           <h2 className="section-title">Frequently Asked Questions</h2>
           <p className="section-subtitle">
@@ -53,7 +53,6 @@ export default function FAQSection() {
                 key={i}
                 className="faq-item"
                 data-open={isOpen || undefined}
-                data-scroll-reveal
                 style={{ '--reveal-delay': `${i * 50}ms` }}
               >
                 <button

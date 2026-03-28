@@ -28,7 +28,7 @@ export default function TechSection() {
   return (
     <section className="tech-section" id="technology">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">Technology</div>
           <h2 className="section-title">Built on Tools We Trust</h2>
           <p className="section-subtitle">
@@ -43,7 +43,6 @@ export default function TechSection() {
               key={i}
               className="tech-card"
               data-spotlight
-              data-scroll-reveal="blur-up"
               style={{ '--reveal-delay': `${i * 80}ms` }}
             >
               <div className="tech-card-icon" aria-hidden="true">{tech.icon}</div>

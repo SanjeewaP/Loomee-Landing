@@ -15,124 +15,6 @@
   background-size: 256px 256px;
 }
 
-/* ---- SHARED SCROLL REVEAL ---- */
-[data-scroll-reveal] {
-  opacity: 0;
-  transform: translate3d(0, 22px, 0);
-  transition: opacity 0.6s var(--ease-out-quart), transform 0.6s var(--ease-out-quart);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-/* ---- SCROLL REVEAL VARIANTS ---- */
-[data-scroll-reveal="from-left"] {
-  opacity: 0;
-  transform: translate3d(-32px, 0, 0);
-  transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="from-left"].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-[data-scroll-reveal="from-right"] {
-  opacity: 0;
-  transform: translate3d(32px, 0, 0);
-  transition: opacity 0.65s var(--ease-out-expo), transform 0.65s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="from-right"].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-[data-scroll-reveal="scale-up"] {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 0.6s var(--ease-out-quart), transform 0.6s var(--ease-out-quart);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="scale-up"].is-visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Variant: blur-up — Apple-style soft focus reveal */
-[data-scroll-reveal="blur-up"] {
-  opacity: 0;
-  transform: translate3d(0, 32px, 0) scale(0.97);
-  filter: blur(8px);
-  transition:
-    opacity 0.7s var(--ease-out-expo),
-    transform 0.7s var(--ease-out-expo),
-    filter 0.7s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="blur-up"].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0px);
-}
-
-/* Variant: clip-up — text mask wipe reveal */
-[data-scroll-reveal="clip-up"] {
-  opacity: 0;
-  clip-path: inset(100% 0 0 0);
-  transform: translate3d(0, 12px, 0);
-  transition:
-    opacity 0.6s var(--ease-out-expo),
-    clip-path 0.6s var(--ease-out-expo),
-    transform 0.6s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="clip-up"].is-visible {
-  opacity: 1;
-  clip-path: inset(0 0 0 0);
-  transform: translate3d(0, 0, 0);
-}
-
-/* Variant: scale-rotate — subtle 3D entrance for cards */
-[data-scroll-reveal="scale-rotate"] {
-  opacity: 0;
-  transform: perspective(800px) rotateX(6deg) translateY(24px) scale(0.96);
-  transition:
-    opacity 0.65s var(--ease-out-expo),
-    transform 0.65s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="scale-rotate"].is-visible {
-  opacity: 1;
-  transform: perspective(800px) rotateX(0deg) translateY(0) scale(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-scroll-reveal],
-  [data-scroll-reveal="from-left"],
-  [data-scroll-reveal="from-right"],
-  [data-scroll-reveal="from-left-far"],
-  [data-scroll-reveal="from-right-far"],
-  [data-scroll-reveal="scale-up"],
-  [data-scroll-reveal="blur-up"],
-  [data-scroll-reveal="clip-up"],
-  [data-scroll-reveal="scale-rotate"] {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    clip-path: none !important;
-    transition: none !important;
-  }
-}
 
 /* ---- KEYFRAME ANIMATIONS ---- */
 @keyframes float-card {
@@ -2608,31 +2490,6 @@ button.legal-back:focus-visible {
   left: 120%;
 }
 
-/* ---- HORIZONTAL SLIDE-IN REVEALS ---- */
-[data-scroll-reveal="from-left-far"] {
-  opacity: 0;
-  transform: translate3d(-80px, 0, 0);
-  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="from-left-far"].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
-[data-scroll-reveal="from-right-far"] {
-  opacity: 0;
-  transform: translate3d(80px, 0, 0);
-  transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-[data-scroll-reveal="from-right-far"].is-visible {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-orb,
   .gradient-text,
@@ -2650,13 +2507,6 @@ button.legal-back:focus-visible {
 
   .cursor-glow {
     display: none;
-  }
-
-  [data-scroll-reveal="from-left-far"],
-  [data-scroll-reveal="from-right-far"] {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
   }
 }
 

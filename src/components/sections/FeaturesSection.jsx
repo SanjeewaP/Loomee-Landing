@@ -42,7 +42,7 @@ export default function FeaturesSection() {
   return (
     <section className="features-section" id="features">
       <div className="container">
-        <div className="section-header" data-scroll-reveal>
+        <div className="section-header">
           <div className="section-eyebrow">Features</div>
           <h2 className="section-title">Everything You Need for a Better Fit</h2>
           <p className="section-subtitle">
@@ -57,7 +57,6 @@ export default function FeaturesSection() {
               key={i}
               className="feature-card"
               data-spotlight
-              data-scroll-reveal="blur-up"
               style={{ '--reveal-delay': `${i * 100}ms` }}
             >
               <div className="feature-icon" aria-hidden="true">{feature.icon}</div>
