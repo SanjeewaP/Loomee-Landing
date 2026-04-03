@@ -3,12 +3,16 @@ import { trackEvent } from '../../utils/analytics'
 import CountUp from '../ui/CountUp'
 import PhoneMockup from '../ui/PhoneMockup'
 import ParticleNetwork from '../ui/ParticleNetwork'
+import SplitText from '../ui/SplitText'
+import ShinyText from '../ui/ShinyText'
+import AuroraBackground from '../ui/AuroraBackground'
+import MagneticButton from '../ui/MagneticButton'
 
 export default function HeroSection() {
   return (
     <section className="hero" id="hero">
       <ParticleNetwork particleCount={50} color="#B5673D" />
-      <div className="hero-bg-gradient" aria-hidden="true" />
+      <AuroraBackground />
       <div className="hero-orb hero-orb-1" aria-hidden="true" />
       <div className="hero-orb hero-orb-2" aria-hidden="true" />
       <div className="hero-orb hero-orb-3" aria-hidden="true" />
@@ -17,11 +21,11 @@ export default function HeroSection() {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="badge-dot" aria-hidden="true" />
-          Powered by Gemini and Replicate
+          <ShinyText>Powered by Gemini and Replicate</ShinyText>
         </div>
 
         <h1>
-          Your style,
+          <SplitText delay={300} wordDelay={80}>Your style,</SplitText>
           <br />
           <span className="highlight gradient-text">perfectly fitted.</span>
         </h1>
@@ -32,13 +36,15 @@ export default function HeroSection() {
         </p>
 
         <div className="hero-buttons">
-          <a
-            href="#cta"
-            className="btn-primary btn-large"
-            onClick={() => trackEvent('cta_click', { location: 'hero' })}
-          >
-            Try Loomeé Free <ArrowRight size={18} />
-          </a>
+          <MagneticButton>
+            <a
+              href="#cta"
+              className="btn-primary btn-large"
+              onClick={() => trackEvent('cta_click', { location: 'hero' })}
+            >
+              Try Loomeé Free <ArrowRight size={18} />
+            </a>
+          </MagneticButton>
           <a href="#how-it-works" className="btn-outline">
             See How It Works
           </a>

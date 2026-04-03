@@ -2776,3 +2776,147 @@ button.legal-back:focus-visible {
 [data-theme="dark"] .testimonial-stars {
   color: var(--terracotta-400);
 }
+
+/* ============================================
+   SPLIT TEXT — word-by-word reveal
+   ============================================ */
+
+.split-word {
+  display: inline-block;
+  opacity: var(--word-visible, 0);
+  transform: translateY(calc((1 - var(--word-visible, 0)) * 18px));
+  transition:
+    opacity 0.55s var(--ease-out-expo) var(--word-delay, 0ms),
+    transform 0.55s var(--ease-out-expo) var(--word-delay, 0ms);
+  will-change: transform, opacity;
+}
+
+/* ============================================
+   SHINY TEXT — sliding shimmer badge highlight
+   ============================================ */
+
+@keyframes shiny-move {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.shiny-text {
+  background: linear-gradient(
+    90deg,
+    currentColor 20%,
+    rgba(255, 255, 255, 0.88) 50%,
+    currentColor 80%
+  );
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shiny-move var(--shiny-duration, 3s) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shiny-text {
+    animation: none;
+    -webkit-text-fill-color: currentColor;
+    background: none;
+  }
+}
+
+/* ============================================
+   AURORA BACKGROUND — multi-blob hero glow
+   ============================================ */
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translateX(-50%) scale(1) translateY(0px); }
+  33%       { transform: translateX(-47%) scale(1.07) translateY(-24px); }
+  66%       { transform: translateX(-53%) scale(0.95) translateY(18px); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  40%       { transform: translate(-28px, 36px) scale(1.1); }
+  75%       { transform: translate(18px, -20px) scale(0.92); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  30%       { transform: translate(32px, -24px) scale(1.08); }
+  70%       { transform: translate(-22px, 28px) scale(0.95); }
+}
+
+.aurora-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* Large centred terracotta blob */
+.aurora-blob-1 {
+  width: 920px;
+  height: 920px;
+  top: -320px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.13) 0%, rgba(196, 128, 106, 0.06) 45%, transparent 70%);
+  filter: blur(64px);
+  animation: aurora-drift-1 20s ease-in-out infinite;
+}
+
+/* Medium upper-right dusty-rose blob */
+.aurora-blob-2 {
+  width: 560px;
+  height: 560px;
+  top: -80px;
+  right: 5%;
+  background: radial-gradient(circle, rgba(196, 128, 106, 0.11) 0%, transparent 70%);
+  filter: blur(72px);
+  animation: aurora-drift-2 18s ease-in-out infinite 3s;
+}
+
+/* Small lower-left warm-amber blob */
+.aurora-blob-3 {
+  width: 420px;
+  height: 420px;
+  bottom: 8%;
+  left: 4%;
+  background: radial-gradient(circle, rgba(212, 152, 80, 0.09) 0%, transparent 70%);
+  filter: blur(60px);
+  animation: aurora-drift-3 22s ease-in-out infinite 7s;
+}
+
+[data-theme="dark"] .aurora-blob-1 {
+  background: radial-gradient(circle, rgba(181, 103, 61, 0.09) 0%, rgba(196, 128, 106, 0.04) 45%, transparent 70%);
+}
+
+[data-theme="dark"] .aurora-blob-2 {
+  background: radial-gradient(circle, rgba(196, 128, 106, 0.07) 0%, transparent 70%);
+}
+
+[data-theme="dark"] .aurora-blob-3 {
+  background: radial-gradient(circle, rgba(212, 152, 80, 0.06) 0%, transparent 70%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob-1,
+  .aurora-blob-2,
+  .aurora-blob-3 {
+    animation: none !important;
+  }
+}
+
+/* ============================================
+   MAGNETIC BUTTON — cursor-pull wrapper
+   ============================================ */
+
+.magnetic-btn-wrapper {
+  display: inline-flex;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}

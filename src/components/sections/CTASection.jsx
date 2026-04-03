@@ -1,4 +1,5 @@
 import WaitlistForm from './WaitlistForm'
+import MagneticButton from '../ui/MagneticButton'
 
 export default function CTASection() {
   return (
@@ -11,9 +12,11 @@ export default function CTASection() {
             will fit before you check out.
           </p>
           <WaitlistForm />
-          <a href="#features" className="btn-glass cta-explore-btn">
-            Explore Features
-          </a>
+          <MagneticButton>
+            <a href="#features" className="btn-glass cta-explore-btn">
+              Explore Features
+            </a>
+          </MagneticButton>
         </div>
       </div>
     </section>
